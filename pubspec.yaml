@@ -1,7 +1,7 @@
 name: dropdown_model_list
-description: A new Flutter package project.
+description: Flexible DropDown Model List works with a simple model list and Easy to use & customized.
 version: 0.0.1
-homepage:
+homepage: https://github.com/sharmajatin1997/dropdown_model_list
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
