@@ -23,7 +23,25 @@ dart
 ```
 import 'package:dropdown_model_list/dropdown_model_list.dart';
 
+```
 
+## Short Example
+
+```
+ SelectDropList(
+              itemSelected:optionItemSelected,
+              dropListModel:dropListModel,
+              showIcon: true,     // Show Icon in DropDown Title
+              showArrowIcon: true,     // Show Arrow Icon in DropDown
+              showBorder: true,
+              paddingTop: 0,
+              icon: const Icon(Icons.person,color: Colors.black),
+              onOptionSelected:(optionItem){
+                optionItemSelected = optionItem;
+                setState(() {});
+              },
+            )
+            
 ```
 
 ## Example
