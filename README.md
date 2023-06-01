@@ -102,6 +102,10 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 ```
+![Screen 1](https://github.com/sharmajatin1997/dropdown_model_list/assets/80152469/c8f9449a-c440-4c36-bcf9-62c67cfc01af)
+
+![Screen 2](https://github.com/sharmajatin1997/dropdown_model_list/assets/80152469/53f61606-3687-4f86-9e4b-e896861e21f8)
+
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
