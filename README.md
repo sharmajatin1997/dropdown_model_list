@@ -4,7 +4,7 @@
 Flexible DropDown Model List works with a simple model list and Easy to use & customized.
 
 <br>
-## Installation
+# Installation
 
 1. Add the latest version of package to your pubspec.yaml (and dart pub get):
 
