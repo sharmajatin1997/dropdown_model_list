@@ -122,6 +122,8 @@ class _MyHomePageState extends State<MyHomePage> {
 ```
 ![Screen 1](https://github.com/sharmajatin1997/dropdown_model_list/assets/80152469/c8f9449a-c440-4c36-bcf9-62c67cfc01af)
 
+![Simulator Screen Shot - iPhone 14 - 2023-06-08 at 13 23 06](https://github.com/sharmajatin1997/dropdown_model_list/assets/80152469/f65c1dae-3492-4929-afbb-566f0bcb8366)
+
 ![Screen 2](https://github.com/sharmajatin1997/dropdown_model_list/assets/80152469/53f61606-3687-4f86-9e4b-e896861e21f8)
 
 
