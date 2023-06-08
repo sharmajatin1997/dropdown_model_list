@@ -20,8 +20,46 @@ class SelectDropList extends StatefulWidget {
   final double textSizeItem;
   final bool showBorder;
   final Color? borderColor;
+  final Color? shadowColor;
   final double borderSize;
-  const SelectDropList({super.key, required this.itemSelected,required this.dropListModel,required this.showIcon,required this.showArrowIcon,required this.onOptionSelected,this.paddingLeft = 20,this.paddingRight=20,this.paddingTop=20,this.paddingBottom=20,this.icon,this.arrowIconSize=20,this.textColorTitle,this.textSizeTitle=16,this.arrowColor,this.textColorItem,this.textSizeItem=14,this.showBorder=true,this.borderColor,this.borderSize=1});
+  final double? height, width;
+  final BorderRadiusGeometry? borderRadius;
+  final List<BoxShadow>? boxShadow;
+  final EdgeInsetsGeometry? containerPadding;
+  final EdgeInsetsGeometry? containerMargin;
+  final Decoration? containerDecoration;
+  final IconData? suffixIcon;
+
+
+
+
+  const SelectDropList({super.key,
+    required this.itemSelected,
+    required this.dropListModel,
+    required this.showIcon,required this.showArrowIcon,
+    required this.onOptionSelected,
+    this.paddingLeft = 20,
+    this.paddingRight=20,
+    this.paddingTop=20,
+    this.paddingBottom=20,
+    this.icon,this.arrowIconSize=20,
+    this.textColorTitle,
+    this.textSizeTitle=16,
+    this.arrowColor,
+    this.textColorItem,
+    this.textSizeItem=14,
+    this.showBorder=true,
+    this.width,
+    this.borderRadius,
+    this.height,
+    this. boxShadow,
+    this.borderColor,
+    this.containerDecoration,
+    this.containerPadding,
+    this.shadowColor,
+    this.suffixIcon,
+    this.containerMargin,
+    this.borderSize=1});
 
   @override
   SelectDropListState createState() => SelectDropListState();
@@ -68,20 +106,22 @@ class SelectDropListState extends State<SelectDropList>
       child: Column(
         children: <Widget>[
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 17),
-            decoration:
-            widget.showBorder?
-            BoxDecoration(
+            height:widget.height??50,
+            width: widget.width??MediaQuery.of(context).size.width,
+            padding: widget.containerPadding??const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+            margin: widget.containerMargin??const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+            decoration: widget.showBorder?
+            widget.containerDecoration??BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
               border:Border.all(color: widget.borderColor??Colors.black,width: widget.borderSize) ,
               color: Colors.white,
             ):
-            BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
+            widget.containerDecoration??BoxDecoration(
+              borderRadius:widget.borderRadius?? BorderRadius.circular(10.0),
               color: Colors.white,
-              boxShadow:  const [
+              boxShadow: widget.boxShadow?? [
                 BoxShadow(
-                    blurRadius: 2, color: Colors.black26, offset: Offset(0, 0))
+                    blurRadius: 2, color: widget.shadowColor??Colors.black26, offset: const Offset(0, 0))
               ],
             ),
             child: Row(
@@ -114,7 +154,7 @@ class SelectDropListState extends State<SelectDropList>
                   child: Align(
                     alignment: const Alignment(1, 0),
                     child: Icon(
-                      isShow ? Icons.arrow_drop_down : Icons.arrow_right,
+                      isShow ? Icons.arrow_drop_down : widget.suffixIcon??Icons.arrow_right,
                       color: widget.arrowColor??Colors.black,
                       size: widget.arrowIconSize,
                     ),
