@@ -71,6 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
               icon: const Icon(Icons.person,color: Colors.black),
               onOptionSelected:(optionItem){
                 optionItemSelected = optionItem;
+                print(optionItemSelected.id);
                 setState(() {});
               },
             )

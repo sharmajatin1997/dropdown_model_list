@@ -15,6 +15,7 @@ class SelectDropList extends StatefulWidget {
   final double arrowIconSize;
   final Color? arrowColor;
   final Color? textColorTitle;
+  final Color? hintColorTitle;
   final double textSizeTitle;
   final Color? textColorItem;
   final double textSizeItem;
@@ -54,6 +55,7 @@ class SelectDropList extends StatefulWidget {
     this.height,
     this. boxShadow,
     this.borderColor,
+    this.hintColorTitle,
     this.containerDecoration,
     this.containerPadding,
     this.shadowColor,
@@ -146,7 +148,7 @@ class SelectDropListState extends State<SelectDropList>
                   },
                   child: Text(
                     optionItemSelected.title,
-                    style: TextStyle(color: widget.textColorTitle??Colors.black, fontSize: widget.textSizeTitle),
+                    style: TextStyle(color: optionItemSelected.id=='0'||optionItemSelected.id==null?widget.hintColorTitle??Colors.grey :widget.textColorTitle??Colors.black, fontSize: widget.textSizeTitle),
                   ),
                 )),
                 Visibility(
