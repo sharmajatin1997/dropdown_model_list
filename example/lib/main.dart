@@ -55,19 +55,10 @@ class _MyHomePageState extends State<MyHomePage> {
               dropListModel:dropListModel,
               showIcon: false,     // Show Icon in DropDown Title
               showArrowIcon: true,     // Show Arrow Icon in DropDown
-              showBorder: false,
+              showBorder: true,
               paddingTop: 0,
               suffixIcon: Icons.arrow_drop_down,
               containerPadding: const EdgeInsets.all(10),
-              containerDecoration:  BoxDecoration(  color: Colors.white,
-                  borderRadius: const BorderRadius.all(Radius.circular(26)),
-                  boxShadow: [
-                    BoxShadow(
-                        offset:Offset(0,10),
-                        blurRadius: 4,
-                        color: Colors.grey.withOpacity(0.5)
-                    ),
-                  ]),
               icon: const Icon(Icons.person,color: Colors.black),
               onOptionSelected:(optionItem){
                 optionItemSelected = optionItem;

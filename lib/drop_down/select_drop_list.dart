@@ -111,7 +111,7 @@ class SelectDropListState extends State<SelectDropList>
             height:widget.height??50,
             width: widget.width??MediaQuery.of(context).size.width,
             padding: widget.containerPadding??const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-            margin: widget.containerMargin??const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+            margin: widget.containerMargin??const EdgeInsets.only(top: 10),
             decoration: widget.showBorder?
             widget.containerDecoration??BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
