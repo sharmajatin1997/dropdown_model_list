@@ -44,6 +44,44 @@ import 'package:dropdown_model_list/dropdown_model_list.dart';
             
 ```
 
+## Short Example Using Getx
+
+```
+
+    DropListModel dropListContentModel = DropListModel([
+    OptionItem(id: "audio", title: "Audio"),
+    OptionItem(id: "video", title: "Video",),
+    OptionItem(id: "presentation", title: "Presentation"),
+    OptionItem(id: "document", title: "Documents",),
+    ]);
+  
+    var optionItemSelectedContent = OptionItem(title: "Select Content").obs;
+    var contentType = ''.obs;
+     
+    Obx(() =>
+     SelectDropList(
+          hintColorTitle: Colors.black,
+          itemSelected: optionItemSelectedContent.value,
+          dropListModel: dropListContentModel,
+          showIcon: false, // Show Icon in DropDown Title
+          showArrowIcon: true, // Show Arrow Icon in DropDown
+          showBorder: true,
+          borderColor: Colors.grey,
+          suffixIcon: Icons.arrow_drop_down,
+          arrowIconSize: 28,
+          paddingBottom: 0,
+          paddingLeft: 0,
+          containerPadding: const EdgeInsets.only(left: 0,right: 10),
+          paddingRight: 0,
+          paddingTop: 0,
+          onOptionSelected: (optionItem) {
+                optionItemSelectedContent.value = optionItem;
+            },
+          )),
+            
+```
+
+
 ## Example
 
 ```

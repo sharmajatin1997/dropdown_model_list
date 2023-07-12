@@ -29,8 +29,8 @@ class SelectDropList extends StatefulWidget {
   final EdgeInsetsGeometry? containerPadding;
   final EdgeInsetsGeometry? containerMargin;
   final Decoration? containerDecoration;
+  final double? heightBottomContainer;
   final IconData? suffixIcon;
-
 
 
 
@@ -53,7 +53,8 @@ class SelectDropList extends StatefulWidget {
     this.width,
     this.borderRadius,
     this.height,
-    this. boxShadow,
+    this.heightBottomContainer,
+    this.boxShadow,
     this.borderColor,
     this.hintColorTitle,
     this.containerDecoration,
@@ -155,10 +156,17 @@ class SelectDropListState extends State<SelectDropList>
                   visible: widget.showArrowIcon,
                   child: Align(
                     alignment: const Alignment(1, 0),
-                    child: Icon(
-                      isShow ? Icons.arrow_drop_down : widget.suffixIcon??Icons.arrow_right,
-                      color: widget.arrowColor??Colors.black,
-                      size: widget.arrowIconSize,
+                    child: GestureDetector(
+                      onTap: (){
+                        isShow = !isShow;
+                        _runExpandCheck();
+                        setState(() {});
+                      },
+                      child: Icon(
+                        isShow ? Icons.arrow_drop_down : widget.suffixIcon??Icons.arrow_right,
+                        color: widget.arrowColor??Colors.black,
+                        size: widget.arrowIconSize,
+                      ),
                     ),
                   ),
                 ),
@@ -170,6 +178,7 @@ class SelectDropListState extends State<SelectDropList>
               axisAlignment: 1.0,
               sizeFactor: animation,
               child: Container(
+                height: widget.heightBottomContainer??200,
                   margin: const EdgeInsets.only(bottom: 20, left: 2, right: 2),
                   padding: const EdgeInsets.only(bottom: 20),
                   decoration: const BoxDecoration(
@@ -184,8 +193,10 @@ class SelectDropListState extends State<SelectDropList>
                           offset: Offset(0, 0))
                     ],
                   ),
-                  child: _buildDropListOptions(
-                      widget.dropListModel.listOptionItems, context,widget.textColorItem,widget.textSizeItem))),
+                  child: SingleChildScrollView(
+                    child: _buildDropListOptions(
+                        widget.dropListModel.listOptionItems, context,widget.textColorItem,widget.textSizeItem),
+                  ))),
         ],
       ),
     );
@@ -221,7 +232,6 @@ class SelectDropListState extends State<SelectDropList>
         ),
         onTap: () {
           optionItemSelected = item;
-          // print(optionItemSelected.id);
           isShow = false;
           expandController.reverse();
           widget.onOptionSelected(item);
