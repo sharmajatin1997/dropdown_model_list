@@ -35,7 +35,12 @@ class _MyHomePageState extends State<MyHomePage> {
     OptionItem(id: "2", title: "Puneet Chand"),
     OptionItem(id: "3", title: "Vikas Bhardwaj"),
     OptionItem(id: "4", title: "Rakesh Kumar"),
-    OptionItem(id: "5", title: "Nitish Kumar")
+    OptionItem(id: "5", title: "Vikram Verma"),
+    OptionItem(id: "6", title: "Kiran Yadav"),
+    OptionItem(id: "7", title: "Pradeep Kumar"),
+    OptionItem(id: "8", title: "Amit Kumar"),
+    OptionItem(id: "9", title: "Sweta Sharma"),
+    OptionItem(id: "10", title: "Ankit Bhist"),
   ]);
   OptionItem optionItemSelected = OptionItem(title: "Select User");
 

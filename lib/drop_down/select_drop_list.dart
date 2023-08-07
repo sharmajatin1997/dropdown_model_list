@@ -193,9 +193,15 @@ class SelectDropListState extends State<SelectDropList>
                           offset: Offset(0, 0))
                     ],
                   ),
-                  child: SingleChildScrollView(
-                    child: _buildDropListOptions(
-                        widget.dropListModel.listOptionItems, context,widget.textColorItem,widget.textSizeItem),
+                  child: Scrollbar(
+                    thumbVisibility: true,
+                    thickness: 4,
+                    radius: const Radius.circular(0),
+                    scrollbarOrientation: ScrollbarOrientation.right,
+                    child: SingleChildScrollView(
+                      child: _buildDropListOptions(
+                          widget.dropListModel.listOptionItems, context,widget.textColorItem,widget.textSizeItem),
+                    ),
                   ))),
         ],
       ),
