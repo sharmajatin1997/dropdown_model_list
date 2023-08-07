@@ -1,3 +1,3 @@
-## 0.0.4
+## 0.0.5
 
-* Bug Fixes and Bottom Container Customized Feature Added.
+* Bug Fixes,Add Scrollbar line and Bottom Container Customized Feature Added.
