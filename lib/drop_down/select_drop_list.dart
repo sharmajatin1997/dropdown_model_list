@@ -194,7 +194,6 @@ class SelectDropListState extends State<SelectDropList>
                     ],
                   ),
                   child: Scrollbar(
-                    thumbVisibility: true,
                     thickness: 4,
                     radius: const Radius.circular(0),
                     scrollbarOrientation: ScrollbarOrientation.right,
