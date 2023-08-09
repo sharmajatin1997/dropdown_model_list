@@ -198,6 +198,7 @@ class SelectDropListState extends State<SelectDropList>
                     radius: const Radius.circular(0),
                     scrollbarOrientation: ScrollbarOrientation.right,
                     child: SingleChildScrollView(
+                      scrollDirection: Axis.vertical,
                       child: _buildDropListOptions(
                           widget.dropListModel.listOptionItems, context,widget.textColorItem,widget.textSizeItem),
                     ),
