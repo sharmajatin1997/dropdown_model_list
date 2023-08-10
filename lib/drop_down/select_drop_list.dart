@@ -1,7 +1,5 @@
 import 'package:dropdown_model_list/drop_down/model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-
 class SelectDropList extends StatefulWidget {
   final OptionItem itemSelected;
   final DropListModel dropListModel;
