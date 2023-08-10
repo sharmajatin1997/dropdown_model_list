@@ -1,5 +1,6 @@
 import 'package:dropdown_model_list/drop_down/model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 class SelectDropList extends StatefulWidget {
   final OptionItem itemSelected;
@@ -37,7 +38,8 @@ class SelectDropList extends StatefulWidget {
   const SelectDropList({super.key,
     required this.itemSelected,
     required this.dropListModel,
-    required this.showIcon,required this.showArrowIcon,
+    required this.showIcon,
+    required this.showArrowIcon,
     required this.onOptionSelected,
     this.paddingLeft = 20,
     this.paddingRight=20,
@@ -74,6 +76,7 @@ class SelectDropListState extends State<SelectDropList>
     late AnimationController expandController;
     late Animation<double> animation;
     bool isShow = false;
+    final scrollController = ScrollController(initialScrollOffset: 0);
 
   @override
   void initState() {
@@ -195,10 +198,13 @@ class SelectDropListState extends State<SelectDropList>
                   ),
                   child: Scrollbar(
                     thickness: 4,
+                    thumbVisibility: true,
+                    interactive: true,
+                    controller: scrollController,
                     radius: const Radius.circular(0),
                     scrollbarOrientation: ScrollbarOrientation.right,
                     child: SingleChildScrollView(
-                      scrollDirection: Axis.vertical,
+                      controller: scrollController,
                       child: _buildDropListOptions(
                           widget.dropListModel.listOptionItems, context,widget.textColorItem,widget.textSizeItem),
                     ),

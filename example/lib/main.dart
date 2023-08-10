@@ -7,6 +7,7 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
+
   final String title;
 
   @override
@@ -29,7 +31,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   DropListModel dropListModel = DropListModel([
     OptionItem(id: "1", title: "Jatin Sharma"),
     OptionItem(id: "2", title: "Puneet Chand"),
@@ -56,21 +57,24 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           children: <Widget>[
             SelectDropList(
-              itemSelected:optionItemSelected,
-              dropListModel:dropListModel,
-              showIcon: false,     // Show Icon in DropDown Title
-              showArrowIcon: true,     // Show Arrow Icon in DropDown
+              itemSelected: optionItemSelected,
+              dropListModel: dropListModel,
+              showIcon: false,
+              // Show Icon in DropDown Title
+              showArrowIcon: true,
+              // Show Arrow Icon in DropDown
               showBorder: true,
               paddingTop: 0,
+              heightBottomContainer: 120,
               suffixIcon: Icons.arrow_drop_down,
               containerPadding: const EdgeInsets.all(10),
-              icon: const Icon(Icons.person,color: Colors.black),
-              onOptionSelected:(optionItem){
+              icon: const Icon(Icons.person, color: Colors.black),
+              onOptionSelected: (optionItem) {
                 optionItemSelected = optionItem;
                 print(optionItemSelected.id);
                 setState(() {});
               },
-            )
+            ),
           ],
         ),
       ),
