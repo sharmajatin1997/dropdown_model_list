@@ -70,11 +70,11 @@ class SelectDropList extends StatefulWidget {
 
 class SelectDropListState extends State<SelectDropList>
     with SingleTickerProviderStateMixin {
-    late OptionItem optionItemSelected;
-    late AnimationController expandController;
-    late Animation<double> animation;
-    bool isShow = false;
-    final scrollController = ScrollController(initialScrollOffset: 0);
+  late OptionItem optionItemSelected;
+  late AnimationController expandController;
+  late Animation<double> animation;
+  bool isShow = false;
+  final scrollController = ScrollController(initialScrollOffset: 0);
 
   @override
   void initState() {
@@ -143,16 +143,16 @@ class SelectDropListState extends State<SelectDropList>
                 ),
                 Expanded(
                     child: GestureDetector(
-                  onTap: () {
-                    isShow = !isShow;
-                    _runExpandCheck();
-                    setState(() {});
-                  },
-                  child: Text(
-                    optionItemSelected.title,
-                    style: TextStyle(color: optionItemSelected.id=='0'||optionItemSelected.id==null?widget.hintColorTitle??Colors.grey :widget.textColorTitle??Colors.black, fontSize: widget.textSizeTitle),
-                  ),
-                )),
+                      onTap: () {
+                        isShow = !isShow;
+                        _runExpandCheck();
+                        setState(() {});
+                      },
+                      child: Text(
+                        optionItemSelected.title,
+                        style: TextStyle(color: optionItemSelected.id=='0'||optionItemSelected.id==null?widget.hintColorTitle??Colors.grey :widget.textColorTitle??Colors.black, fontSize: widget.textSizeTitle),
+                      ),
+                    )),
                 Visibility(
                   visible: widget.showArrowIcon,
                   child: Align(
@@ -179,7 +179,7 @@ class SelectDropListState extends State<SelectDropList>
               axisAlignment: 1.0,
               sizeFactor: animation,
               child: Container(
-                height: widget.heightBottomContainer??200,
+                  height: widget.heightBottomContainer??200,
                   margin: const EdgeInsets.only(bottom: 20, left: 2, right: 2),
                   padding: const EdgeInsets.only(bottom: 20),
                   decoration: const BoxDecoration(

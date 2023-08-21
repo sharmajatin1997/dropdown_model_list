@@ -45,6 +45,8 @@ class _MyHomePageState extends State<MyHomePage> {
   ]);
   OptionItem optionItemSelected = OptionItem(title: "Select User");
 
+  TextEditingController controller=TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,6 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
         padding: const EdgeInsets.only(top: 20),
         child: Column(
           children: <Widget>[
+            ///Simple DropDown
             SelectDropList(
               itemSelected: optionItemSelected,
               dropListModel: dropListModel,
@@ -65,7 +68,27 @@ class _MyHomePageState extends State<MyHomePage> {
               // Show Arrow Icon in DropDown
               showBorder: true,
               paddingTop: 0,
-              heightBottomContainer: 120,
+              suffixIcon: Icons.arrow_drop_down,
+              containerPadding: const EdgeInsets.all(10),
+              icon: const Icon(Icons.person, color: Colors.black),
+              onOptionSelected: (optionItem) {
+                optionItemSelected = optionItem;
+                print(optionItemSelected.id);
+                setState(() {});
+              },
+            ),
+
+            ///Search DropDown
+            SearchDropList(
+              itemSelected: optionItemSelected,
+              dropListModel: dropListModel,
+              showIcon: false,
+              // Show Icon in DropDown Title
+              showArrowIcon: true,
+              // Show Arrow Icon in DropDown
+              showBorder: true,
+              textEditingController: controller,
+              paddingTop: 0,
               suffixIcon: Icons.arrow_drop_down,
               containerPadding: const EdgeInsets.all(10),
               icon: const Icon(Icons.person, color: Colors.black),
