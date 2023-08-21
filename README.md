@@ -199,7 +199,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
 ![Simulator Screen Shot - iPhone 14 - 2023-06-08 at 13 23 06](https://github.com/sharmajatin1997/dropdown_model_list/assets/80152469/f65c1dae-3492-4929-afbb-566f0bcb8366)
 
-![Simulator Screen Shot - iPhone 14 Plus - 2023-08-21 at 13.05.02.png](..%2F..%2FDesktop%2FSimulator%20Screen%20Shot%20-%20iPhone%2014%20Plus%20-%202023-08-21%20at%2013.05.02.png)
+![Simulator Screen Shot - iPhone 14 Plus - 2023-08-21 at 13 05 02](https://github.com/sharmajatin1997/dropdown_model_list/assets/80152469/77679cde-47c5-4793-9c21-42f104803d9b)
+
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
