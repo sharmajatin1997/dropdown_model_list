@@ -281,7 +281,7 @@ class SearchDropListState extends State<SearchDropList>
             style: const TextStyle(fontSize: 14),
             decoration: !showCross
                 ? const InputDecoration(
-                border: InputBorder.none, prefixIcon: Icon(Icons.search))
+                border: InputBorder.none, prefixIcon: Icon(Icons.search),hintText: 'Search here..')
                 : InputDecoration(
                 border: InputBorder.none,
                 suffixIcon: GestureDetector(
