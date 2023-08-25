@@ -116,7 +116,7 @@ class SelectDropListState extends State<SelectDropList>
             margin: widget.containerMargin??const EdgeInsets.only(top: 10),
             decoration: widget.showBorder?
             widget.containerDecoration??BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
+              borderRadius: widget.borderRadius??BorderRadius.circular(10.0),
               border:Border.all(color: widget.borderColor??Colors.black,width: widget.borderSize) ,
               color: Colors.white,
             ):
