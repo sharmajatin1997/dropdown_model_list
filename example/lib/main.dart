@@ -73,28 +73,50 @@ class _MyHomePageState extends State<MyHomePage> {
               icon: const Icon(Icons.person, color: Colors.black),
               onOptionSelected: (optionItem) {
                 optionItemSelected = optionItem;
-                print(optionItemSelected.id);
                 setState(() {});
               },
             ),
 
-            ///Search DropDown
-            SearchDropList(
-              itemSelected: optionItemSelected,
+            // ///Search DropDown
+            // SearchDropList(
+            //   itemSelected: optionItemSelected,
+            //   dropListModel: dropListModel,
+            //   showIcon: false,
+            //   // Show Icon in DropDown Title
+            //   showArrowIcon: true,
+            //   // Show Arrow Icon in DropDown
+            //   showBorder: true,
+            //   textEditingController: controller,
+            //   paddingTop: 0,
+            //   suffixIcon: Icons.arrow_drop_down,
+            //   containerPadding: const EdgeInsets.all(10),
+            //   icon: const Icon(Icons.person, color: Colors.black),
+            //   onOptionSelected: (optionItem) {
+            //     optionItemSelected = optionItem;
+            //     print(optionItemSelected.id);
+            //     setState(() {});
+            //   },
+            // ),
+
+
+            ///Multiple Selection DropDown
+            SelectDropMultipleList(
+              defaultText: optionItemSelected,
               dropListModel: dropListModel,
               showIcon: false,
-              // Show Icon in DropDown Title
               showArrowIcon: true,
-              // Show Arrow Icon in DropDown
               showBorder: true,
-              textEditingController: controller,
+              heightBottomContainer: 120,
               paddingTop: 0,
               suffixIcon: Icons.arrow_drop_down,
               containerPadding: const EdgeInsets.all(10),
               icon: const Icon(Icons.person, color: Colors.black),
-              onOptionSelected: (optionItem) {
-                optionItemSelected = optionItem;
-                print(optionItemSelected.id);
+              onOptionListSelected: (list) {
+               for(var data in list){
+                 if(data.id!=null){
+                   print(data.id);
+                 }
+               }
                 setState(() {});
               },
             ),
