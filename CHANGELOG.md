@@ -1,3 +1,3 @@
-## 1.0.0
+## 1.1
 
-* New Search Feature added.
+* Bug Fixes.

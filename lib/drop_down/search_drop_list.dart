@@ -134,7 +134,7 @@ class SearchDropListState extends State<SearchDropList>
             decoration: widget.showBorder
                 ? widget.containerDecoration ??
                 BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
+                  borderRadius:widget.borderRadius ?? BorderRadius.circular(10.0),
                   border: Border.all(
                       color: widget.borderColor ?? Colors.black,
                       width: widget.borderSize),
