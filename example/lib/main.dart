@@ -1,4 +1,5 @@
 import 'package:dropdown_model_list/dropdown_model_list.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -63,9 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
               itemSelected: optionItemSelected,
               dropListModel: dropListModel,
               showIcon: false,
-              // Show Icon in DropDown Title
               showArrowIcon: true,
-              // Show Arrow Icon in DropDown
               showBorder: true,
               paddingTop: 0,
               suffixIcon: Icons.arrow_drop_down,
@@ -82,9 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
               itemSelected: optionItemSelected,
               dropListModel: dropListModel,
               showIcon: false,
-              // Show Icon in DropDown Title
               showArrowIcon: true,
-              // Show Arrow Icon in DropDown
               showBorder: true,
               textEditingController: controller,
               paddingTop: 0,
@@ -93,7 +90,9 @@ class _MyHomePageState extends State<MyHomePage> {
               icon: const Icon(Icons.person, color: Colors.black),
               onOptionSelected: (optionItem) {
                 optionItemSelected = optionItem;
-                print(optionItemSelected.id);
+                if (kDebugMode) {
+                  print(optionItemSelected.id);
+                }
                 setState(() {});
               },
             ),
@@ -106,7 +105,6 @@ class _MyHomePageState extends State<MyHomePage> {
               showIcon: false,
               showArrowIcon: true,
               showBorder: true,
-              heightBottomContainer: 120,
               paddingTop: 0,
               suffixIcon: Icons.arrow_drop_down,
               containerPadding: const EdgeInsets.all(10),
@@ -114,7 +112,9 @@ class _MyHomePageState extends State<MyHomePage> {
               onOptionListSelected: (list) {
                for(var data in list){
                  if(data.id!=null){
-                   print(data.id);
+                   if (kDebugMode) {
+                     print(data.id);
+                   }
                  }
                }
                 setState(() {});

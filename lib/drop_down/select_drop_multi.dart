@@ -206,79 +206,81 @@ class SelectDropMultipleListState extends State<SelectDropMultipleList>
           SizeTransition(
               axisAlignment: 1.0,
               sizeFactor: animation,
-              child: Stack(
-                alignment: Alignment.bottomRight,
-                children: [
-                  Container(
-                      height: widget.heightBottomContainer ?? 200,
-                      margin:
-                          const EdgeInsets.only(bottom: 20, left: 2, right: 2),
-                      padding: const EdgeInsets.only(bottom: 20),
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(10),
-                            bottomRight: Radius.circular(10)),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                              blurRadius: 2,
-                              color: Colors.black26,
-                              offset: Offset(0, 0))
-                        ],
-                      ),
-                      child: Scrollbar(
-                        thickness: 4,
-                        thumbVisibility: true,
-                        interactive: true,
-                        controller: scrollController,
-                        radius: const Radius.circular(0),
-                        scrollbarOrientation: ScrollbarOrientation.right,
-                        child: SingleChildScrollView(
-                          controller: scrollController,
-                          child: _buildDropListOptions(
-                              widget.dropListModel.listOptionItems,
-                              context,
-                              widget.textColorItem,
-                              widget.textSizeItem),
+              child: Container(
+                  height: widget.heightBottomContainer ?? 230,
+                  margin:
+                      const EdgeInsets.only(bottom: 20, left: 2, right: 2),
+                  padding: const EdgeInsets.only(bottom: 20),
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10)),
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                          blurRadius: 2,
+                          color: Colors.black26,
+                          offset: Offset(0, 0))
+                    ],
+                  ),
+                  child: Scrollbar(
+                    thickness: 4,
+                    thumbVisibility: true,
+                    interactive: true,
+                    controller: scrollController,
+                    radius: const Radius.circular(0),
+                    scrollbarOrientation: ScrollbarOrientation.right,
+                    child: Stack(
+                      children: [
+                        SizedBox(
+                          height: widget.heightBottomContainer!=null?widget.heightBottomContainer!-60 : 160,
+                          child: SingleChildScrollView(
+                            controller: scrollController,
+                            child: _buildDropListOptions(
+                                widget.dropListModel.listOptionItems,
+                                context,
+                                widget.textColorItem,
+                                widget.textSizeItem),
+                          ),
                         ),
-                      )),
-                  Positioned(
-                    bottom: 30,
-                    right: 10,
-                    child: GestureDetector(
-                      onTap: () {
-                        isShow = false;
-                        expandController.reverse();
-                        widget.onOptionListSelected(selectedItems);
-                      },
-                      child: Container(
-                        width: 80,
-                        height: 40,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: Colors.blue.withOpacity(0.8),
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color(0x3D001978),
-                              offset: Offset(0, 0),
-                              blurRadius: 5,
-                            )
-                          ],
-                        ),
-                        margin: const EdgeInsets.only(left: 10, top: 10),
-                        child: const Text(
-                          'Submit',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500),
-                        ),
-                      ),
+                        Positioned(
+                          bottom: 0,
+                          right: 10,
+                          child: GestureDetector(
+                            onTap: () {
+                              isShow = false;
+                              expandController.reverse();
+                              widget.onOptionListSelected(selectedItems);
+                            },
+                            child: Container(
+                              width: 80,
+                              height: 35,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                color: Colors.blue.withOpacity(0.8),
+                                borderRadius: BorderRadius.circular(10),
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: Color(0x3D001978),
+                                    offset: Offset(0, 0),
+                                    blurRadius: 5,
+                                  )
+                                ],
+                              ),
+                              margin: const EdgeInsets.only(left: 10, top: 10),
+                              child: const Text(
+                                'Submit',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
                     ),
-                  )
-                ],
-              )),
+                  ))),
         ],
       ),
     );
@@ -297,7 +299,7 @@ class SelectDropMultipleListState extends State<SelectDropMultipleList>
   Widget _buildSubMenu(OptionItem item, BuildContext context,
       Color? textColorItem, double textSizeItem) {
     return Padding(
-      padding: const EdgeInsets.only(left: 20, top: 5, bottom: 5),
+      padding: const EdgeInsets.only(left: 20, top: 5, bottom: 5,right: 10),
       child: GestureDetector(
         onTap: () {
           if (!select.contains(item.id)) {
@@ -325,6 +327,7 @@ class SelectDropMultipleListState extends State<SelectDropMultipleList>
         child: Padding(
           padding: const EdgeInsets.only(right: 8.0,top: 12),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Flexible(
                 child: Text(item.title,
