@@ -86,6 +86,7 @@ import 'package:dropdown_model_list/dropdown_model_list.dart';
 
 ```
 import 'package:dropdown_model_list/dropdown_model_list.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -145,15 +146,12 @@ class _MyHomePageState extends State<MyHomePage> {
         padding: const EdgeInsets.only(top: 20),
         child: Column(
           children: <Widget>[
-            ///Simple DropDown 
-            
+            ///Simple DropDown
             SelectDropList(
               itemSelected: optionItemSelected,
               dropListModel: dropListModel,
               showIcon: false,
-              // Show Icon in DropDown Title
               showArrowIcon: true,
-              // Show Arrow Icon in DropDown
               showBorder: true,
               paddingTop: 0,
               suffixIcon: Icons.arrow_drop_down,
@@ -161,20 +159,16 @@ class _MyHomePageState extends State<MyHomePage> {
               icon: const Icon(Icons.person, color: Colors.black),
               onOptionSelected: (optionItem) {
                 optionItemSelected = optionItem;
-                print(optionItemSelected.id);
                 setState(() {});
               },
             ),
-            
-            ///Search DropDown 
-            
+
+            ///Search DropDown
             SearchDropList(
               itemSelected: optionItemSelected,
               dropListModel: dropListModel,
               showIcon: false,
-              // Show Icon in DropDown Title
               showArrowIcon: true,
-              // Show Arrow Icon in DropDown
               showBorder: true,
               textEditingController: controller,
               paddingTop: 0,
@@ -183,7 +177,33 @@ class _MyHomePageState extends State<MyHomePage> {
               icon: const Icon(Icons.person, color: Colors.black),
               onOptionSelected: (optionItem) {
                 optionItemSelected = optionItem;
-                print(optionItemSelected.id);
+                if (kDebugMode) {
+                  print(optionItemSelected.id);
+                }
+                setState(() {});
+              },
+            ),
+
+
+            ///Multiple Selection DropDown
+            SelectDropMultipleList(
+              defaultText: optionItemSelected,
+              dropListModel: dropListModel,
+              showIcon: false,
+              showArrowIcon: true,
+              showBorder: true,
+              paddingTop: 0,
+              suffixIcon: Icons.arrow_drop_down,
+              containerPadding: const EdgeInsets.all(10),
+              icon: const Icon(Icons.person, color: Colors.black),
+              onOptionListSelected: (list) {
+               for(var data in list){
+                 if(data.id!=null){
+                   if (kDebugMode) {
+                     print(data.id);
+                   }
+                 }
+               }
                 setState(() {});
               },
             ),
@@ -193,6 +213,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
 
 ```
 ![Screen 1](https://github.com/sharmajatin1997/dropdown_model_list/assets/80152469/c8f9449a-c440-4c36-bcf9-62c67cfc01af)
