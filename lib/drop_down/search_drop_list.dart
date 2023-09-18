@@ -37,39 +37,39 @@ class SearchDropList extends StatefulWidget {
 
   const SearchDropList(
       {super.key,
-        required this.itemSelected,
-        required this.dropListModel,
-        required this.showIcon,
-        required this.showArrowIcon,
-        required this.onOptionSelected,
-        required this.textEditingController,
-        this.paddingLeft = 20,
-        this.paddingRight = 20,
-        this.paddingTop = 20,
-        this.paddingBottom = 20,
-        this.icon,
-        this.arrowIconSize = 20,
-        this.textColorTitle,
-        this.textSizeTitle = 16,
-        this.arrowColor,
-        this.textColorItem,
-        this.textSizeItem = 14,
-        this.showBorder = true,
-        this.width,
-        this.borderRadius,
-        this.height,
-        this.heightBottomContainer,
-        this.boxShadow,
-        this.borderColor,
-        this.hintColorTitle,
-        this.containerDecoration,
-        this.containerDecorationSearch,
-        this.containerPadding,
-        this.shadowColor,
-        this.suffixIcon,
-        this.containerMargin,
-        this.heightSearchFeild,
-        this.borderSize = 1});
+      required this.itemSelected,
+      required this.dropListModel,
+      required this.showIcon,
+      required this.showArrowIcon,
+      required this.onOptionSelected,
+      required this.textEditingController,
+      this.paddingLeft = 20,
+      this.paddingRight = 20,
+      this.paddingTop = 20,
+      this.paddingBottom = 20,
+      this.icon,
+      this.arrowIconSize = 20,
+      this.textColorTitle,
+      this.textSizeTitle = 16,
+      this.arrowColor,
+      this.textColorItem,
+      this.textSizeItem = 14,
+      this.showBorder = true,
+      this.width,
+      this.borderRadius,
+      this.height,
+      this.heightBottomContainer,
+      this.boxShadow,
+      this.borderColor,
+      this.hintColorTitle,
+      this.containerDecoration,
+      this.containerDecorationSearch,
+      this.containerPadding,
+      this.shadowColor,
+      this.suffixIcon,
+      this.containerMargin,
+      this.heightSearchFeild,
+      this.borderSize = 1});
 
   @override
   SearchDropListState createState() => SearchDropListState();
@@ -133,26 +133,27 @@ class SearchDropListState extends State<SearchDropList>
             margin: widget.containerMargin ?? const EdgeInsets.only(top: 10),
             decoration: widget.showBorder
                 ? widget.containerDecoration ??
-                BoxDecoration(
-                  borderRadius:widget.borderRadius ?? BorderRadius.circular(10.0),
-                  border: Border.all(
-                      color: widget.borderColor ?? Colors.black,
-                      width: widget.borderSize),
-                  color: Colors.white,
-                )
+                    BoxDecoration(
+                      borderRadius:
+                          widget.borderRadius ?? BorderRadius.circular(10.0),
+                      border: Border.all(
+                          color: widget.borderColor ?? Colors.black,
+                          width: widget.borderSize),
+                      color: Colors.white,
+                    )
                 : widget.containerDecoration ??
-                BoxDecoration(
-                  borderRadius:
-                  widget.borderRadius ?? BorderRadius.circular(10.0),
-                  color: Colors.white,
-                  boxShadow: widget.boxShadow ??
-                      [
-                        BoxShadow(
-                            blurRadius: 2,
-                            color: widget.shadowColor ?? Colors.black26,
-                            offset: const Offset(0, 0))
-                      ],
-                ),
+                    BoxDecoration(
+                      borderRadius:
+                          widget.borderRadius ?? BorderRadius.circular(10.0),
+                      color: Colors.white,
+                      boxShadow: widget.boxShadow ??
+                          [
+                            BoxShadow(
+                                blurRadius: 2,
+                                color: widget.shadowColor ?? Colors.black26,
+                                offset: const Offset(0, 0))
+                          ],
+                    ),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -162,29 +163,29 @@ class SearchDropListState extends State<SearchDropList>
                     child: widget.icon != null
                         ? widget.icon!
                         : const Icon(
-                      Icons.menu,
-                      color: Colors.black,
-                    )),
+                            Icons.menu,
+                            color: Colors.black,
+                          )),
                 const SizedBox(
                   width: 10,
                 ),
                 Expanded(
                     child: GestureDetector(
-                      onTap: () {
-                        isShow = !isShow;
-                        _runExpandCheck();
-                        setState(() {});
-                      },
-                      child: Text(
-                        optionItemSelected.title,
-                        style: TextStyle(
-                            color: optionItemSelected.id == '0' ||
+                  onTap: () {
+                    isShow = !isShow;
+                    _runExpandCheck();
+                    setState(() {});
+                  },
+                  child: Text(
+                    optionItemSelected.title,
+                    style: TextStyle(
+                        color: optionItemSelected.id == '0' ||
                                 optionItemSelected.id == null
-                                ? widget.hintColorTitle ?? Colors.grey
-                                : widget.textColorTitle ?? Colors.black,
-                            fontSize: widget.textSizeTitle),
-                      ),
-                    )),
+                            ? widget.hintColorTitle ?? Colors.grey
+                            : widget.textColorTitle ?? Colors.black,
+                        fontSize: widget.textSizeTitle),
+                  ),
+                )),
                 Visibility(
                   visible: widget.showArrowIcon,
                   child: Align(
@@ -266,7 +267,8 @@ class SearchDropListState extends State<SearchDropList>
         Container(
           height: widget.heightSearchFeild ?? 50,
           width: MediaQuery.of(context).size.width,
-          margin: widget.containerMargin ?? const EdgeInsets.only(top: 10, bottom: 10, left: 15, right: 15),
+          margin: widget.containerMargin ??
+              const EdgeInsets.only(top: 10, bottom: 10, left: 15, right: 15),
           decoration: widget.containerDecorationSearch ??
               BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
@@ -281,22 +283,25 @@ class SearchDropListState extends State<SearchDropList>
             style: const TextStyle(fontSize: 14),
             decoration: !showCross
                 ? const InputDecoration(
-                border: InputBorder.none, prefixIcon: Icon(Icons.search),hintText: 'Search here..')
+                    border: InputBorder.none,
+                    prefixIcon: Icon(Icons.search),
+                    hintText: 'Search here..')
                 : InputDecoration(
-                border: InputBorder.none,
-                suffixIcon: GestureDetector(
-                    onTap: () {
-                      _searchResult.clear();
-                      showCross = false;
-                      textEditingController?.clear();
-                      setState(() {});
-                    }, child: const Icon(Icons.clear)),
-                prefixIcon: const Icon(Icons.search)),
+                    border: InputBorder.none,
+                    suffixIcon: GestureDetector(
+                        onTap: () {
+                          _searchResult.clear();
+                          showCross = false;
+                          textEditingController?.clear();
+                          setState(() {});
+                        },
+                        child: const Icon(Icons.clear)),
+                    prefixIcon: const Icon(Icons.search)),
           ),
         ),
         _searchResult.isNotEmpty || textEditingController!.text.isNotEmpty
             ? _searchListData(
-            _searchResult, context, textColorItem, textSizeItem)
+                _searchResult, context, textColorItem, textSizeItem)
             : _listData(_userDetails, context, textColorItem, textSizeItem)
       ],
     );
@@ -322,11 +327,20 @@ class SearchDropListState extends State<SearchDropList>
 
   Widget _searchListData(List<OptionItem> localList, BuildContext context,
       Color? textColorItem, double textSizeItem) {
-    return Column(children: localList.map((item) => _buildSubMenu(item, context, textColorItem, textSizeItem)).toList());
+    return Column(
+        children: localList
+            .map((item) =>
+                _buildSubMenu(item, context, textColorItem, textSizeItem))
+            .toList());
   }
 
-  Widget _listData(List<OptionItem> localList, BuildContext context, Color? textColorItem, double textSizeItem) {
-    return Column(children: localList.map((item) => _buildSubMenu(item, context, textColorItem, textSizeItem)).toList());
+  Widget _listData(List<OptionItem> localList, BuildContext context,
+      Color? textColorItem, double textSizeItem) {
+    return Column(
+        children: localList
+            .map((item) =>
+                _buildSubMenu(item, context, textColorItem, textSizeItem))
+            .toList());
   }
 
   Widget _buildSubMenu(OptionItem item, BuildContext context,

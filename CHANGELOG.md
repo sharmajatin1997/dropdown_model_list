@@ -1,3 +1,3 @@
-## 1.1.1
+## 1.1.2
 
-* Bug Fixes and Multiple Selection Feature Added.
+* Bug Fixes in Multiple Selection Feature.

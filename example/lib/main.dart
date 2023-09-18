@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
   ]);
   OptionItem optionItemSelected = OptionItem(title: "Select User");
 
-  TextEditingController controller=TextEditingController();
+  TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +97,6 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
 
-
             ///Multiple Selection DropDown
             SelectDropMultipleList(
               defaultText: optionItemSelected,
@@ -106,17 +105,28 @@ class _MyHomePageState extends State<MyHomePage> {
               showArrowIcon: true,
               showBorder: true,
               paddingTop: 0,
+              submitText: "OK",
+              colorSubmitButton: Colors.amber,
+              selectedIconWidget: Container(
+                decoration: const BoxDecoration(
+                    shape: BoxShape.rectangle, color: Colors.amber),
+                child: const Icon(
+                  Icons.done,
+                  size: 15,
+                  color: Colors.white,
+                ),
+              ),
               suffixIcon: Icons.arrow_drop_down,
               containerPadding: const EdgeInsets.all(10),
               icon: const Icon(Icons.person, color: Colors.black),
               onOptionListSelected: (list) {
-               for(var data in list){
-                 if(data.id!=null){
-                   if (kDebugMode) {
-                     print(data.id);
-                   }
-                 }
-               }
+                for (var data in list) {
+                  if (data.id != null) {
+                    if (kDebugMode) {
+                      print(data.id);
+                    }
+                  }
+                }
                 setState(() {});
               },
             ),

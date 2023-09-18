@@ -31,6 +31,9 @@ class SelectDropMultipleList extends StatefulWidget {
   final Decoration? containerDecoration;
   final double? heightBottomContainer;
   final IconData? suffixIcon;
+  final Widget? selectedIconWidget;
+  final String? submitText;
+  final Color? colorSubmitButton;
 
   const SelectDropMultipleList(
       {super.key,
@@ -63,6 +66,9 @@ class SelectDropMultipleList extends StatefulWidget {
       this.shadowColor,
       this.suffixIcon,
       this.containerMargin,
+      this.selectedIconWidget,
+      this.submitText,
+      this.colorSubmitButton,
       this.borderSize = 1});
 
   @override
@@ -208,8 +214,7 @@ class SelectDropMultipleListState extends State<SelectDropMultipleList>
               sizeFactor: animation,
               child: Container(
                   height: widget.heightBottomContainer ?? 230,
-                  margin:
-                      const EdgeInsets.only(bottom: 20, left: 2, right: 2),
+                  margin: const EdgeInsets.only(bottom: 20, left: 2, right: 2),
                   padding: const EdgeInsets.only(bottom: 20),
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
@@ -233,7 +238,9 @@ class SelectDropMultipleListState extends State<SelectDropMultipleList>
                     child: Stack(
                       children: [
                         SizedBox(
-                          height: widget.heightBottomContainer!=null?widget.heightBottomContainer!-60 : 160,
+                          height: widget.heightBottomContainer != null
+                              ? widget.heightBottomContainer! - 60
+                              : 160,
                           child: SingleChildScrollView(
                             controller: scrollController,
                             child: _buildDropListOptions(
@@ -257,7 +264,8 @@ class SelectDropMultipleListState extends State<SelectDropMultipleList>
                               height: 35,
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
-                                color: Colors.blue.withOpacity(0.8),
+                                color: widget.colorSubmitButton ??
+                                    Colors.blue.withOpacity(0.8),
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: const [
                                   BoxShadow(
@@ -268,9 +276,9 @@ class SelectDropMultipleListState extends State<SelectDropMultipleList>
                                 ],
                               ),
                               margin: const EdgeInsets.only(left: 10, top: 10),
-                              child: const Text(
-                                'Submit',
-                                style: TextStyle(
+                              child: Text(
+                                widget.submitText ?? 'Submit',
+                                style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 16,
                                     fontWeight: FontWeight.w500),
@@ -299,7 +307,7 @@ class SelectDropMultipleListState extends State<SelectDropMultipleList>
   Widget _buildSubMenu(OptionItem item, BuildContext context,
       Color? textColorItem, double textSizeItem) {
     return Padding(
-      padding: const EdgeInsets.only(left: 20, top: 5, bottom: 5,right: 10),
+      padding: const EdgeInsets.only(left: 20, top: 5, bottom: 5, right: 10),
       child: GestureDetector(
         onTap: () {
           if (!select.contains(item.id)) {
@@ -325,7 +333,7 @@ class SelectDropMultipleListState extends State<SelectDropMultipleList>
           setState(() {});
         },
         child: Padding(
-          padding: const EdgeInsets.only(right: 8.0,top: 12),
+          padding: const EdgeInsets.only(right: 8.0, top: 12),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
@@ -344,15 +352,16 @@ class SelectDropMultipleListState extends State<SelectDropMultipleList>
               ),
               Visibility(
                   visible: select.contains(item.id),
-                  child: Container(
-                    decoration: const BoxDecoration(
-                        shape: BoxShape.circle, color: Colors.blue),
-                    child: const Icon(
-                      Icons.done,
-                      size: 15,
-                      color: Colors.white,
-                    ),
-                  )),
+                  child: widget.selectedIconWidget ??
+                      Container(
+                        decoration: const BoxDecoration(
+                            shape: BoxShape.circle, color: Colors.blue),
+                        child: const Icon(
+                          Icons.done,
+                          size: 15,
+                          color: Colors.white,
+                        ),
+                      )),
             ],
           ),
         ),
