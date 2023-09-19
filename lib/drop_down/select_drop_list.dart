@@ -262,7 +262,7 @@ class SelectDropListState extends State<SelectDropList>
             Expanded(
               flex: 1,
               child: Container(
-                padding:  EdgeInsets.only(top: widget.paddingDropItem??15),
+                padding: EdgeInsets.only(top: widget.paddingDropItem ?? 15),
                 child: Text(item.title,
                     style: TextStyle(
                         color: textColorItem ?? Colors.black,
