@@ -31,6 +31,7 @@ class SelectDropList extends StatefulWidget {
   final Decoration? containerDecoration;
   final double? heightBottomContainer;
   final IconData? suffixIcon;
+  final double? paddingDropItem;
 
   const SelectDropList(
       {super.key,
@@ -47,6 +48,7 @@ class SelectDropList extends StatefulWidget {
       this.arrowIconSize = 20,
       this.textColorTitle,
       this.textSizeTitle = 16,
+      this.paddingDropItem,
       this.arrowColor,
       this.textColorItem,
       this.textSizeItem = 14,
@@ -260,7 +262,7 @@ class SelectDropListState extends State<SelectDropList>
             Expanded(
               flex: 1,
               child: Container(
-                padding: const EdgeInsets.only(top: 15),
+                padding:  EdgeInsets.only(top: widget.paddingDropItem??15),
                 child: Text(item.title,
                     style: TextStyle(
                         color: textColorItem ?? Colors.black,

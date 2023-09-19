@@ -67,6 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
               showArrowIcon: true,
               showBorder: true,
               paddingTop: 0,
+              paddingDropItem: 10,
               suffixIcon: Icons.arrow_drop_down,
               containerPadding: const EdgeInsets.all(10),
               icon: const Icon(Icons.person, color: Colors.black),

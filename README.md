@@ -69,6 +69,7 @@ import 'package:dropdown_model_list/dropdown_model_list.dart';
           borderColor: Colors.grey,
           suffixIcon: Icons.arrow_drop_down,
           arrowIconSize: 28,
+          paddingDropItem: 10,
           paddingBottom: 0,
           paddingLeft: 0,
           containerPadding: const EdgeInsets.only(left: 0,right: 10),
