@@ -103,7 +103,6 @@ class _MyHomePageState extends State<MyHomePage> {
               defaultText: optionItemSelected,
               dropListModel: dropListModel,
               showIcon: false,
-              showArrowIcon: true,
               showBorder: true,
               paddingTop: 0,
               submitText: "OK",
