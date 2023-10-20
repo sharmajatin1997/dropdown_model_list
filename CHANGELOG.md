@@ -1,3 +1,3 @@
-## 1.1.3
+## 1.1.4
 
-* Bug Fixes.
+* Bug Fixes in Multiple selection and clear list Feature.
