@@ -32,40 +32,45 @@ class SelectDropList extends StatefulWidget {
   final double? heightBottomContainer;
   final IconData? suffixIcon;
   final double? paddingDropItem;
+  final Color? dropboxborderColor;
+  final BorderRadiusGeometry? dropbBoxborderRadius;
 
-  const SelectDropList(
-      {super.key,
-      required this.itemSelected,
-      required this.dropListModel,
-      required this.showIcon,
-      required this.showArrowIcon,
-      required this.onOptionSelected,
-      this.paddingLeft = 20,
-      this.paddingRight = 20,
-      this.paddingTop = 20,
-      this.paddingBottom = 20,
-      this.icon,
-      this.arrowIconSize = 20,
-      this.textColorTitle,
-      this.textSizeTitle = 16,
-      this.paddingDropItem,
-      this.arrowColor,
-      this.textColorItem,
-      this.textSizeItem = 14,
-      this.showBorder = true,
-      this.width,
-      this.borderRadius,
-      this.height,
-      this.heightBottomContainer,
-      this.boxShadow,
-      this.borderColor,
-      this.hintColorTitle,
-      this.containerDecoration,
-      this.containerPadding,
-      this.shadowColor,
-      this.suffixIcon,
-      this.containerMargin,
-      this.borderSize = 1});
+  const SelectDropList({
+    super.key,
+    required this.itemSelected,
+    required this.dropListModel,
+    required this.showIcon,
+    required this.showArrowIcon,
+    required this.onOptionSelected,
+    this.paddingLeft = 20,
+    this.paddingRight = 20,
+    this.paddingTop = 20,
+    this.paddingBottom = 20,
+    this.icon,
+    this.arrowIconSize = 20,
+    this.textColorTitle,
+    this.textSizeTitle = 16,
+    this.paddingDropItem,
+    this.arrowColor,
+    this.textColorItem,
+    this.textSizeItem = 14,
+    this.showBorder = true,
+    this.width,
+    this.borderRadius,
+    this.height,
+    this.heightBottomContainer,
+    this.boxShadow,
+    this.borderColor,
+    this.hintColorTitle,
+    this.containerDecoration,
+    this.containerPadding,
+    this.shadowColor,
+    this.suffixIcon,
+    this.containerMargin,
+    this.borderSize = 1,
+    this.dropbBoxborderRadius,
+    this.dropboxborderColor,
+  });
 
   @override
   SelectDropListState createState() => SelectDropListState();
@@ -209,12 +214,15 @@ class SelectDropListState extends State<SelectDropList>
                   height: widget.heightBottomContainer ?? 200,
                   margin: const EdgeInsets.only(bottom: 20, left: 2, right: 2),
                   padding: const EdgeInsets.only(bottom: 20),
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(10),
-                        bottomRight: Radius.circular(10)),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                        color: widget.dropboxborderColor ?? Colors.grey),
+                    borderRadius: widget.dropbBoxborderRadius ??
+                        const BorderRadius.only(
+                            bottomLeft: Radius.circular(10),
+                            bottomRight: Radius.circular(10)),
                     color: Colors.white,
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
                           blurRadius: 2,
                           color: Colors.black26,
