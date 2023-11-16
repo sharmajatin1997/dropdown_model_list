@@ -31,7 +31,7 @@ class SelectDropList extends StatefulWidget {
   final Decoration? containerDecoration;
   final double? heightBottomContainer;
   final IconData? suffixIcon;
-  final double? paddingDropItem;
+  final EdgeInsetsGeometry? paddingDropItem;
   final Color? dropboxborderColor;
   final BorderRadiusGeometry? dropbBoxborderRadius;
 
@@ -263,23 +263,21 @@ class SelectDropListState extends State<SelectDropList>
   Widget _buildSubMenu(OptionItem item, BuildContext context,
       Color? textColorItem, double textSizeItem) {
     return Padding(
-      padding: const EdgeInsets.only(left: 20, top: 5, bottom: 5),
+      padding: widget.paddingDropItem ??
+          const EdgeInsets.only(left: 20, top: 15, bottom: 5),
       child: GestureDetector(
         child: Row(
           children: <Widget>[
             Expanded(
               flex: 1,
-              child: Container(
-                padding: EdgeInsets.only(top: widget.paddingDropItem ?? 15),
-                child: Text(item.title,
-                    style: TextStyle(
-                        color: textColorItem ?? Colors.black,
-                        fontWeight: FontWeight.w400,
-                        fontSize: textSizeItem),
-                    maxLines: 3,
-                    textAlign: TextAlign.start,
-                    overflow: TextOverflow.ellipsis),
-              ),
+              child: Text(item.title,
+                  style: TextStyle(
+                      color: textColorItem ?? Colors.black,
+                      fontWeight: FontWeight.w400,
+                      fontSize: textSizeItem),
+                  maxLines: 3,
+                  textAlign: TextAlign.start,
+                  overflow: TextOverflow.ellipsis),
             ),
           ],
         ),

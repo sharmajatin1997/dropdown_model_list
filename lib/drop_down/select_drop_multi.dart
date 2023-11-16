@@ -89,8 +89,10 @@ class SelectDropMultipleListState extends State<SelectDropMultipleList>
   @override
   void initState() {
     super.initState();
-    optionItemSelected = OptionItem(id: widget.defaultText.id, title: widget.defaultText.title);
-    expandController = AnimationController(vsync: this, duration: const Duration(milliseconds: 350));
+    optionItemSelected =
+        OptionItem(id: widget.defaultText.id, title: widget.defaultText.title);
+    expandController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 350));
     animation = CurvedAnimation(
       parent: expandController,
       curve: Curves.linear,
@@ -129,7 +131,8 @@ class SelectDropMultipleListState extends State<SelectDropMultipleList>
                 const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
             margin: widget.containerMargin ?? const EdgeInsets.only(top: 10),
             decoration: widget.showBorder
-                ? widget.containerDecoration ?? BoxDecoration(
+                ? widget.containerDecoration ??
+                    BoxDecoration(
                       borderRadius:
                           widget.borderRadius ?? BorderRadius.circular(10.0),
                       border: Border.all(
@@ -137,7 +140,8 @@ class SelectDropMultipleListState extends State<SelectDropMultipleList>
                           width: widget.borderSize),
                       color: Colors.white,
                     )
-                : widget.containerDecoration ?? BoxDecoration(
+                : widget.containerDecoration ??
+                    BoxDecoration(
                       borderRadius:
                           widget.borderRadius ?? BorderRadius.circular(10.0),
                       color: Colors.white,
@@ -176,7 +180,7 @@ class SelectDropMultipleListState extends State<SelectDropMultipleList>
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                         color: optionItemSelected.id == '0' ||
-                            optionItemSelected.id == null
+                                optionItemSelected.id == null
                             ? widget.hintColorTitle ?? Colors.grey
                             : widget.textColorTitle ?? Colors.black,
                         fontSize: widget.textSizeTitle),
@@ -191,28 +195,28 @@ class SelectDropMultipleListState extends State<SelectDropMultipleList>
                         // isShow = !isShow;
                         // _runExpandCheck();
                         // setState(() {});
-                        isShowCross=false;
+                        isShowCross = false;
 
                         final tagName = optionItemSelected.id;
                         final split = tagName?.split(',');
-                        for (int i = 0; i < split!.length; i++){
-                          if(!select.contains(split[i])){
+                        for (int i = 0; i < split!.length; i++) {
+                          if (!select.contains(split[i])) {
                             select.add(split[i]);
                           }
                         }
 
-                        for(var item in widget.dropListModel.listOptionItems){
+                        for (var item in widget.dropListModel.listOptionItems) {
                           if (select.contains(item.id)) {
                             selectedItems.remove(item);
                             select.remove(item.id!);
                           }
                         }
                         print(select);
-                        optionItemSelected=widget.defaultText;
+                        optionItemSelected = widget.defaultText;
                         setState(() {});
-
                       },
-                      child: const Icon(Icons.close,
+                      child: const Icon(
+                        Icons.close,
                         color: Colors.black,
                         size: 20,
                       ),
@@ -321,7 +325,8 @@ class SelectDropMultipleListState extends State<SelectDropMultipleList>
   Widget _buildSubMenu(OptionItem item, BuildContext context,
       Color? textColorItem, double textSizeItem) {
     return Padding(
-      padding:widget.paddingBottomList??const EdgeInsets.only(left: 20, top: 5, bottom: 5, right: 10),
+      padding: widget.paddingBottomList ??
+          const EdgeInsets.only(left: 20, top: 5, bottom: 5, right: 10),
       child: GestureDetector(
         onTap: () {
           if (!select.contains(item.id)) {
@@ -339,10 +344,10 @@ class SelectDropMultipleListState extends State<SelectDropMultipleList>
             }
           }
           if (title.isNotEmpty) {
-            isShowCross=true;
+            isShowCross = true;
             optionItemSelected = OptionItem(id: "1", title: title.join(','));
           } else {
-            isShowCross=false;
+            isShowCross = false;
             optionItemSelected = widget.defaultText;
           }
 

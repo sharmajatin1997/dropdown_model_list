@@ -125,7 +125,7 @@ class _MyHomePageState extends State<MyHomePage> {
     OptionItem(id: "2", title: "Puneet Chand"),
     OptionItem(id: "3", title: "Vikas Bhardwaj"),
     OptionItem(id: "4", title: "Rakesh Kumar"),
-    OptionItem(id: "5", title: "Vikram Verma"),
+    OptionItem(id: "5", title: "Alok Dubey"),
     OptionItem(id: "6", title: "Kiran Yadav"),
     OptionItem(id: "7", title: "Pradeep Kumar"),
     OptionItem(id: "8", title: "Amit Kumar"),
@@ -155,7 +155,7 @@ class _MyHomePageState extends State<MyHomePage> {
               showArrowIcon: true,
               showBorder: true,
               paddingTop: 0,
-              paddingDropItem: 10,
+              paddingDropItem: const EdgeInsets.only(left: 20,top: 10,bottom: 10,right: 20),
               suffixIcon: Icons.arrow_drop_down,
               containerPadding: const EdgeInsets.all(10),
               icon: const Icon(Icons.person, color: Colors.black),
@@ -224,8 +224,6 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-
 ```
 ![Screen 1](https://github.com/sharmajatin1997/dropdown_model_list/assets/80152469/c8f9449a-c440-4c36-bcf9-62c67cfc01af)
 
