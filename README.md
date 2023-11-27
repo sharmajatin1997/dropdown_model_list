@@ -218,19 +218,41 @@ class _MyHomePageState extends State<MyHomePage> {
                 setState(() {});
               },
             ),
+
+            ///Radio Selection DropDown
+            SelectDropRadio(
+              defaultText: optionItemSelected,
+              dropListModel: dropListModel,
+              showIcon: false,
+              showBorder: true,
+              paddingTop: 0,
+              submitText: "OK",
+              colorSubmitButton: Colors.amber,
+              selectedRadioColor: Colors.amber,
+              suffixIcon: Icons.arrow_drop_down,
+              containerPadding: const EdgeInsets.all(10),
+              icon: const Icon(Icons.person, color: Colors.black),
+              onOptionListSelected: (list) {
+                for (var data in list) {
+                  if (data.id != null) {
+                    if (kDebugMode) {
+                      print(data.id);
+                    }
+                  }
+                }
+                setState(() {});
+              },
+            ),
           ],
         ),
       ),
     );
   }
-}
+}  
 ```
-![Screen 1](https://github.com/sharmajatin1997/dropdown_model_list/assets/80152469/c8f9449a-c440-4c36-bcf9-62c67cfc01af)
-
-![Simulator Screen Shot - iPhone 14 - 2023-06-08 at 13 23 06](https://github.com/sharmajatin1997/dropdown_model_list/assets/80152469/f65c1dae-3492-4929-afbb-566f0bcb8366)
-
 ![Simulator Screen Shot - iPhone 14 Plus - 2023-08-21 at 13 05 02](https://github.com/sharmajatin1997/dropdown_model_list/assets/80152469/77679cde-47c5-4793-9c21-42f104803d9b)
 ![Screenshot_1693204401](https://github.com/sharmajatin1997/dropdown_model_list/assets/80152469/aa72000e-3d5d-4203-841f-4c6374c9b831)
+![Simulator Screenshot - iPhone 15 Pro Max - 2023-11-27 at 16 09 26](https://github.com/sharmajatin1997/dropdown_model_list/assets/80152469/7f875339-57f6-4050-a16a-15304465a36c)
 
 
 ## Contributing
