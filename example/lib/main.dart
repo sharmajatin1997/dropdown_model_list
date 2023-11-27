@@ -131,6 +131,31 @@ class _MyHomePageState extends State<MyHomePage> {
                 setState(() {});
               },
             ),
+
+            ///Radio Selection DropDown
+            SelectDropRadio(
+              defaultText: optionItemSelected,
+              dropListModel: dropListModel,
+              showIcon: false,
+              showBorder: true,
+              paddingTop: 0,
+              submitText: "OK",
+              colorSubmitButton: Colors.amber,
+              selectedRadioColor: Colors.amber,
+              suffixIcon: Icons.arrow_drop_down,
+              containerPadding: const EdgeInsets.all(10),
+              icon: const Icon(Icons.person, color: Colors.black),
+              onOptionListSelected: (list) {
+                for (var data in list) {
+                  if (data.id != null) {
+                    if (kDebugMode) {
+                      print(data.id);
+                    }
+                  }
+                }
+                setState(() {});
+              },
+            ),
           ],
         ),
       ),

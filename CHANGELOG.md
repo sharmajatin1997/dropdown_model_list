@@ -1,3 +1,3 @@
-## 1.1.6
+## 1.1.7
 
-* Bug Fixes in DropDown List.
+* Bug Fixes in DropDown List and Radio Selection Feature.

@@ -1,7 +1,12 @@
 <h1 align="center">Flutter DropDown Model List</h1>
 
 ## Features
-Flexible DropDown Model List works with a simple model list and Easy to use & customized.In DropDown Model List Search Feature also Available.
+Flexible DropDown Model List works with a simple model list and Easy to use & customized.
+In DropDown Model List Feature:-
+* Single Selection
+* Single Selection With Search
+* Multiple Selection
+* Radio Button Selection
 
 <br>
 # Installation

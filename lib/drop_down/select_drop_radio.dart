@@ -1,7 +1,8 @@
 import 'package:dropdown_model_list/drop_down/model.dart';
+import 'package:dropdown_model_list/generated/assets.dart';
 import 'package:flutter/material.dart';
 
-class SelectDropMultipleList extends StatefulWidget {
+class SelectDropRadio extends StatefulWidget {
   final OptionItem defaultText;
   final DropListModel dropListModel;
   final Function(List<OptionItem> optionItem) onOptionListSelected;
@@ -18,6 +19,8 @@ class SelectDropMultipleList extends StatefulWidget {
   final double textSizeTitle;
   final Color? textColorItem;
   final double textSizeItem;
+  final double? scaleRadio;
+  final Color? selectedRadioColor;
   final bool showBorder;
   final Color? borderColor;
   final Color? shadowColor;
@@ -30,12 +33,11 @@ class SelectDropMultipleList extends StatefulWidget {
   final Decoration? containerDecoration;
   final double? heightBottomContainer;
   final IconData? suffixIcon;
-  final Widget? selectedIconWidget;
   final String? submitText;
   final Color? colorSubmitButton;
   final EdgeInsetsGeometry? paddingBottomList;
 
-  const SelectDropMultipleList(
+  const SelectDropRadio(
       {super.key,
       required this.defaultText,
       required this.dropListModel,
@@ -65,17 +67,18 @@ class SelectDropMultipleList extends StatefulWidget {
       this.shadowColor,
       this.suffixIcon,
       this.containerMargin,
-      this.selectedIconWidget,
       this.submitText,
       this.colorSubmitButton,
       this.paddingBottomList,
+      this.scaleRadio,
+      this.selectedRadioColor,
       this.borderSize = 1});
 
   @override
-  SelectDropMultipleListState createState() => SelectDropMultipleListState();
+  SelectDropRadioState createState() => SelectDropRadioState();
 }
 
-class SelectDropMultipleListState extends State<SelectDropMultipleList>
+class SelectDropRadioState extends State<SelectDropRadio>
     with SingleTickerProviderStateMixin {
   late OptionItem optionItemSelected;
   List<OptionItem> selectedItems = [];
@@ -254,18 +257,15 @@ class SelectDropMultipleListState extends State<SelectDropMultipleList>
                     scrollbarOrientation: ScrollbarOrientation.right,
                     child: Stack(
                       children: [
-                        SizedBox(
-                          height: widget.heightBottomContainer != null
-                              ? widget.heightBottomContainer! - 60
-                              : 160,
-                          child: SingleChildScrollView(
-                            controller: scrollController,
-                            child: _buildDropListOptions(
-                                widget.dropListModel.listOptionItems,
-                                context,
-                                widget.textColorItem,
-                                widget.textSizeItem),
-                          ),
+                        SingleChildScrollView(
+                          controller: scrollController,
+                          child: _buildDropListOptions(
+                              widget.dropListModel.listOptionItems,
+                              context,
+                              widget.textColorItem,
+                              widget.textSizeItem,
+                              widget.scaleRadio,
+                              widget.selectedRadioColor),
                         ),
                         Positioned(
                           bottom: 0,
@@ -311,30 +311,37 @@ class SelectDropMultipleListState extends State<SelectDropMultipleList>
     );
   }
 
-  Column _buildDropListOptions(List<OptionItem> items, BuildContext context,
-      Color? textColorItem, double textSizeItem) {
+  Column _buildDropListOptions(
+      List<OptionItem> items,
+      BuildContext context,
+      Color? textColorItem,
+      double textSizeItem,
+      double? scaleRadio,
+      Color? selectedRadioColor) {
     return Column(
       children: items
-          .map((item) =>
-              _buildSubMenu(item, context, textColorItem, textSizeItem))
+          .map((item) => _buildSubMenu(item, context, textColorItem,
+              textSizeItem, scaleRadio, selectedRadioColor))
           .toList(),
     );
   }
 
-  Widget _buildSubMenu(OptionItem item, BuildContext context,
-      Color? textColorItem, double textSizeItem) {
+  Widget _buildSubMenu(
+      OptionItem item,
+      BuildContext context,
+      Color? textColorItem,
+      double textSizeItem,
+      double? scaleRadio,
+      Color? selectedRadioColor) {
     return Padding(
       padding: widget.paddingBottomList ??
           const EdgeInsets.only(left: 20, top: 5, bottom: 5, right: 10),
       child: GestureDetector(
         onTap: () {
-          if (!select.contains(item.id)) {
-            selectedItems.add(item);
-            select.add(item.id!);
-          } else {
-            selectedItems.remove(item);
-            select.remove(item.id!);
-          }
+          selectedItems.clear();
+          select.clear();
+          selectedItems.add(item);
+          select.add(item.id!);
 
           List<String> title = [];
           for (var item in selectedItems) {
@@ -355,8 +362,24 @@ class SelectDropMultipleListState extends State<SelectDropMultipleList>
         child: Padding(
           padding: const EdgeInsets.only(right: 8.0, top: 12),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
+              select.contains(item.id)
+                  ? Image.asset(
+                      Assets.assetsRadio,
+                      package: 'dropdown_model_list',
+                      scale: scaleRadio ?? 3,
+                      color: selectedRadioColor ?? Colors.blue,
+                    )
+                  : Image.asset(
+                      Assets.assetsRadio,
+                      package: 'dropdown_model_list',
+                      scale: scaleRadio ?? 3,
+                      color: Colors.grey,
+                    ),
+              const SizedBox(
+                width: 5,
+              ),
               Flexible(
                 child: Text(item.title,
                     style: TextStyle(
@@ -367,21 +390,6 @@ class SelectDropMultipleListState extends State<SelectDropMultipleList>
                     textAlign: TextAlign.start,
                     overflow: TextOverflow.ellipsis),
               ),
-              const SizedBox(
-                width: 5,
-              ),
-              Visibility(
-                  visible: select.contains(item.id),
-                  child: widget.selectedIconWidget ??
-                      Container(
-                        decoration: const BoxDecoration(
-                            shape: BoxShape.circle, color: Colors.blue),
-                        child: const Icon(
-                          Icons.done,
-                          size: 15,
-                          color: Colors.white,
-                        ),
-                      )),
             ],
           ),
         ),
