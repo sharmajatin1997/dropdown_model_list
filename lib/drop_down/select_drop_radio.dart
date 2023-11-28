@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class SelectDropRadio extends StatefulWidget {
   final OptionItem defaultText;
   final DropListModel dropListModel;
-  final Function(List<OptionItem> optionItem) onOptionListSelected;
+  final Function(OptionItem optionItem) onOptionListSelected;
   final bool showIcon;
   final double paddingLeft;
   final double paddingRight;
@@ -274,7 +274,9 @@ class SelectDropRadioState extends State<SelectDropRadio>
                             onTap: () {
                               isShow = false;
                               expandController.reverse();
-                              widget.onOptionListSelected(selectedItems);
+                              if (selectedItems.isNotEmpty) {
+                                widget.onOptionListSelected(selectedItems[0]);
+                              }
                             },
                             child: Container(
                               width: 80,

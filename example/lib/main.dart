@@ -145,14 +145,8 @@ class _MyHomePageState extends State<MyHomePage> {
               suffixIcon: Icons.arrow_drop_down,
               containerPadding: const EdgeInsets.all(10),
               icon: const Icon(Icons.person, color: Colors.black),
-              onOptionListSelected: (list) {
-                for (var data in list) {
-                  if (data.id != null) {
-                    if (kDebugMode) {
-                      print(data.id);
-                    }
-                  }
-                }
+              onOptionListSelected: (data) {
+                print(data.title);
                 setState(() {});
               },
             ),
