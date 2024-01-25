@@ -33,6 +33,7 @@ class SelectDropList extends StatefulWidget {
   final IconData? suffixIcon;
   final EdgeInsetsGeometry? paddingDropItem;
   final Color? dropboxborderColor;
+  final Color? dropboxColor;
   final BorderRadiusGeometry? dropbBoxborderRadius;
 
   const SelectDropList({
@@ -70,6 +71,7 @@ class SelectDropList extends StatefulWidget {
     this.borderSize = 1,
     this.dropbBoxborderRadius,
     this.dropboxborderColor,
+    this.dropboxColor,
   });
 
   @override
@@ -221,7 +223,7 @@ class SelectDropListState extends State<SelectDropList>
                         const BorderRadius.only(
                             bottomLeft: Radius.circular(10),
                             bottomRight: Radius.circular(10)),
-                    color: Colors.white,
+                    color:widget.dropboxColor?? Colors.white,
                     boxShadow: const [
                       BoxShadow(
                           blurRadius: 2,
