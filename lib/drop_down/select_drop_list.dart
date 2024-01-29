@@ -223,7 +223,7 @@ class SelectDropListState extends State<SelectDropList>
                         const BorderRadius.only(
                             bottomLeft: Radius.circular(10),
                             bottomRight: Radius.circular(10)),
-                    color:widget.dropboxColor?? Colors.white,
+                    color: widget.dropboxColor ?? Colors.white,
                     boxShadow: const [
                       BoxShadow(
                           blurRadius: 2,
