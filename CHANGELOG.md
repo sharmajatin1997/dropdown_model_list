@@ -1,3 +1,3 @@
-## 2.0.2
+## 2.0.3
 
-* Bug Fixes Select Drop Down.
+* New Type add in model to get Extra Data from list.

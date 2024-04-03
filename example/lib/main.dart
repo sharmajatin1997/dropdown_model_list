@@ -33,16 +33,16 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   DropListModel dropListModel = DropListModel([
-    OptionItem(id: "1", title: "Jatin Sharma"),
-    OptionItem(id: "2", title: "Puneet Chand"),
-    OptionItem(id: "3", title: "Vikas Bhardwaj"),
-    OptionItem(id: "4", title: "Rakesh Kumar"),
-    OptionItem(id: "5", title: "Alok Dubey"),
-    OptionItem(id: "6", title: "Kiran Yadav"),
-    OptionItem(id: "7", title: "Pradeep Kumar"),
-    OptionItem(id: "8", title: "Amit Kumar"),
-    OptionItem(id: "9", title: "Sweta Sharma"),
-    OptionItem(id: "10", title: "Ankit Bhist"),
+    OptionItem(id: "1", title: "Jatin Sharma",data: 'CSE Student'),
+    OptionItem(id: "2", title: "Puneet Chand",data: 'CSE Student'),
+    OptionItem(id: "3", title: "Vikas Bhardwaj",data: 'CSE Student'),
+    OptionItem(id: "4", title: "Rakesh Kumar",data: 'CSE Student'),
+    OptionItem(id: "5", title: "Alok Dubey",data: 'CSE Student'),
+    OptionItem(id: "6", title: "Kiran Yadav",data: 'CSE Student'),
+    OptionItem(id: "7", title: "Pradeep Kumar",data: 'CSE Student'),
+    OptionItem(id: "8", title: "Amit Kumar",data: 'CSE Student'),
+    OptionItem(id: "9", title: "Shweta Sharma",data: 'CSE Student'),
+    OptionItem(id: "10", title: "Ankit Bhist",data: 'CSE Student'),
   ]);
   OptionItem optionItemSelected = OptionItem(title: "Select User");
 

@@ -5,7 +5,8 @@ class DropListModel {
 
 class OptionItem {
   final String? id;
+  final String? data;
   final String title;
 
-  OptionItem({this.id, required this.title});
+  OptionItem({this.id, required this.title,this.data});
 }
