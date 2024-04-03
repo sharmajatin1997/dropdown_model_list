@@ -8,5 +8,5 @@ class OptionItem {
   final String? data;
   final String title;
 
-  OptionItem({this.id, required this.title,this.data});
+  OptionItem({this.id, required this.title, this.data});
 }

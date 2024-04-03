@@ -90,7 +90,9 @@ class SelectDropListState extends State<SelectDropList>
   void initState() {
     super.initState();
     optionItemSelected = OptionItem(
-        id: widget.itemSelected.id, title: widget.itemSelected.title,data: widget.itemSelected.data);
+        id: widget.itemSelected.id,
+        title: widget.itemSelected.title,
+        data: widget.itemSelected.data);
     expandController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 350));
     animation = CurvedAnimation(
