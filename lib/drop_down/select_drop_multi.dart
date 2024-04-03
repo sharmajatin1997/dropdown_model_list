@@ -5,6 +5,7 @@ class SelectDropMultipleList extends StatefulWidget {
   final OptionItem defaultText;
   final DropListModel dropListModel;
   final Function(List<OptionItem> optionItem) onOptionListSelected;
+  final Function(bool cancel)? onTapCross;
   final bool showIcon;
   final double paddingLeft;
   final double paddingRight;
@@ -33,6 +34,7 @@ class SelectDropMultipleList extends StatefulWidget {
   final Widget? selectedIconWidget;
   final String? submitText;
   final Color? colorSubmitButton;
+  final Color? dropboxColor;
   final EdgeInsetsGeometry? paddingBottomList;
 
   const SelectDropMultipleList(
@@ -41,6 +43,7 @@ class SelectDropMultipleList extends StatefulWidget {
       required this.dropListModel,
       required this.showIcon,
       required this.onOptionListSelected,
+      this.onTapCross,
       this.paddingLeft = 20,
       this.paddingRight = 20,
       this.paddingTop = 20,
@@ -69,6 +72,7 @@ class SelectDropMultipleList extends StatefulWidget {
       this.submitText,
       this.colorSubmitButton,
       this.paddingBottomList,
+      this.dropboxColor,
       this.borderSize = 1});
 
   @override
@@ -212,6 +216,7 @@ class SelectDropMultipleListState extends State<SelectDropMultipleList>
                           }
                         }
                         optionItemSelected = widget.defaultText;
+                        widget.onTapCross!(true);
                         setState(() {});
                       },
                       child: const Icon(
@@ -233,13 +238,13 @@ class SelectDropMultipleListState extends State<SelectDropMultipleList>
                   height: widget.heightBottomContainer ?? 230,
                   margin: const EdgeInsets.only(bottom: 20, left: 2, right: 2),
                   padding: const EdgeInsets.only(bottom: 20),
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.circular(10),
                         bottomRight: Radius.circular(10)),
-                    color: Colors.white,
+                    color: widget.dropboxColor ?? Colors.white,
                     boxShadow: [
-                      BoxShadow(
+                      const BoxShadow(
                           blurRadius: 2,
                           color: Colors.black26,
                           offset: Offset(0, 0))

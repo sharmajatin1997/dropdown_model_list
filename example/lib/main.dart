@@ -107,6 +107,11 @@ class _MyHomePageState extends State<MyHomePage> {
               showBorder: true,
               paddingTop: 0,
               submitText: "OK",
+              onTapCross: (data) {
+                if (data) {
+                  print("List Clear");
+                }
+              },
               colorSubmitButton: Colors.amber,
               selectedIconWidget: Container(
                 decoration: const BoxDecoration(

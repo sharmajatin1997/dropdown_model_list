@@ -1,3 +1,3 @@
-## 2.0.3
+## 2.1.0
 
-* New Type add in model to get Extra Data from list.
+* New Type add in model to get Extra Data from list and new Changes in Multiple Selection.
