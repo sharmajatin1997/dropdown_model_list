@@ -198,16 +198,16 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   DropListModel dropListModel = DropListModel([
-    OptionItem(id: "1", title: "Jatin Sharma"),
-    OptionItem(id: "2", title: "Puneet Chand"),
-    OptionItem(id: "3", title: "Vikas Bhardwaj"),
-    OptionItem(id: "4", title: "Rakesh Kumar"),
-    OptionItem(id: "5", title: "Alok Dubey"),
-    OptionItem(id: "6", title: "Kiran Yadav"),
-    OptionItem(id: "7", title: "Pradeep Kumar"),
-    OptionItem(id: "8", title: "Amit Kumar"),
-    OptionItem(id: "9", title: "Sweta Sharma"),
-    OptionItem(id: "10", title: "Ankit Bhist"),
+    OptionItem(id: "1", title: "Jatin Sharma", data: 'CSE Student'),
+    OptionItem(id: "2", title: "Puneet Chand", data: 'CSE Student'),
+    OptionItem(id: "3", title: "Vikas Bhardwaj", data: 'CSE Student'),
+    OptionItem(id: "4", title: "Rakesh Kumar", data: 'CSE Student'),
+    OptionItem(id: "5", title: "Alok Dubey", data: 'CSE Student'),
+    OptionItem(id: "6", title: "Kiran Yadav", data: 'CSE Student'),
+    OptionItem(id: "7", title: "Pradeep Kumar", data: 'CSE Student'),
+    OptionItem(id: "8", title: "Amit Kumar", data: 'CSE Student'),
+    OptionItem(id: "9", title: "Shweta Sharma", data: 'CSE Student'),
+    OptionItem(id: "10", title: "Ankit Bhist", data: 'CSE Student'),
   ]);
   OptionItem optionItemSelected = OptionItem(title: "Select User");
 
@@ -231,8 +231,10 @@ class _MyHomePageState extends State<MyHomePage> {
               showIcon: false,
               showArrowIcon: true,
               showBorder: true,
+              enable: true,
               paddingTop: 0,
-              paddingDropItem: const EdgeInsets.only(left: 20,top: 10,bottom: 10,right: 20),
+              paddingDropItem: const EdgeInsets.only(
+                  left: 20, top: 10, bottom: 10, right: 20),
               suffixIcon: Icons.arrow_drop_down,
               containerPadding: const EdgeInsets.all(10),
               icon: const Icon(Icons.person, color: Colors.black),
@@ -249,6 +251,7 @@ class _MyHomePageState extends State<MyHomePage> {
               showIcon: false,
               showArrowIcon: true,
               showBorder: true,
+              enable: true,
               textEditingController: controller,
               paddingTop: 0,
               suffixIcon: Icons.arrow_drop_down,
@@ -269,8 +272,14 @@ class _MyHomePageState extends State<MyHomePage> {
               dropListModel: dropListModel,
               showIcon: false,
               showBorder: true,
+              enable: true,
               paddingTop: 0,
               submitText: "OK",
+              onTapCross: (data) {
+                if (data) {
+                  print("List Clear");
+                }
+              },
               colorSubmitButton: Colors.amber,
               selectedIconWidget: Container(
                 decoration: const BoxDecoration(
@@ -303,6 +312,7 @@ class _MyHomePageState extends State<MyHomePage> {
               showIcon: false,
               showBorder: true,
               paddingTop: 0,
+              enable: true,
               submitText: "OK",
               colorSubmitButton: Colors.amber,
               selectedRadioColor: Colors.amber,
@@ -319,7 +329,8 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-}  
+}
+
 ```
 ![Simulator Screen Shot - iPhone 14 Plus - 2023-08-21 at 13 05 02](https://github.com/sharmajatin1997/dropdown_model_list/assets/80152469/77679cde-47c5-4793-9c21-42f104803d9b)
 ![Screenshot_1693204401](https://github.com/sharmajatin1997/dropdown_model_list/assets/80152469/aa72000e-3d5d-4203-841f-4c6374c9b831)

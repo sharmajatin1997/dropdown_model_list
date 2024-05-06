@@ -1,3 +1,3 @@
-## 2.1.0
+## 2.1.1
 
-* New Type add in model to get Extra Data from list and new Changes in Multiple Selection.
+* Enable True or False added in all Dropdown.

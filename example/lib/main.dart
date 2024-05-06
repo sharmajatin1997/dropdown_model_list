@@ -66,6 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
               showIcon: false,
               showArrowIcon: true,
               showBorder: true,
+              enable: true,
               paddingTop: 0,
               paddingDropItem: const EdgeInsets.only(
                   left: 20, top: 10, bottom: 10, right: 20),
@@ -85,6 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
               showIcon: false,
               showArrowIcon: true,
               showBorder: true,
+              enable: true,
               textEditingController: controller,
               paddingTop: 0,
               suffixIcon: Icons.arrow_drop_down,
@@ -105,6 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
               dropListModel: dropListModel,
               showIcon: false,
               showBorder: true,
+              enable: true,
               paddingTop: 0,
               submitText: "OK",
               onTapCross: (data) {
@@ -144,6 +147,7 @@ class _MyHomePageState extends State<MyHomePage> {
               showIcon: false,
               showBorder: true,
               paddingTop: 0,
+              enable: true,
               submitText: "OK",
               colorSubmitButton: Colors.amber,
               selectedRadioColor: Colors.amber,

@@ -22,6 +22,7 @@ class SelectDropRadio extends StatefulWidget {
   final double? scaleRadio;
   final Color? selectedRadioColor;
   final bool showBorder;
+  final bool enable;
   final Color? borderColor;
   final Color? shadowColor;
   final double borderSize;
@@ -55,6 +56,7 @@ class SelectDropRadio extends StatefulWidget {
       this.textColorItem,
       this.textSizeItem = 14,
       this.showBorder = true,
+      this.enable = true,
       this.width,
       this.borderRadius,
       this.height,
@@ -174,8 +176,10 @@ class SelectDropRadioState extends State<SelectDropRadio>
                 Expanded(
                     child: GestureDetector(
                   onTap: () {
-                    isShow = !isShow;
-                    _runExpandCheck();
+                    if (widget.enable) {
+                      isShow = !isShow;
+                      _runExpandCheck();
+                    }
                     setState(() {});
                   },
                   child: Text(
