@@ -247,8 +247,8 @@ class SelectDropMultipleListState extends State<SelectDropMultipleList>
                         bottomLeft: Radius.circular(10),
                         bottomRight: Radius.circular(10)),
                     color: widget.dropboxColor ?? Colors.white,
-                    boxShadow: [
-                      const BoxShadow(
+                    boxShadow: const [
+                      BoxShadow(
                           blurRadius: 2,
                           color: Colors.black26,
                           offset: Offset(0, 0))
