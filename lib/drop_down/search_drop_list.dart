@@ -35,6 +35,9 @@ class SearchDropList extends StatefulWidget {
   final Decoration? containerDecorationSearch;
   final double? heightBottomContainer;
   final IconData? suffixIcon;
+  final Color? dropboxborderColor;
+  final Color? dropboxColor;
+  final BorderRadiusGeometry? dropbBoxborderRadius;
 
   const SearchDropList(
       {super.key,
@@ -71,6 +74,9 @@ class SearchDropList extends StatefulWidget {
       this.suffixIcon,
       this.containerMargin,
       this.heightSearchFeild,
+      this.dropboxborderColor,
+      this.dropboxColor,
+      this.dropbBoxborderRadius,
       this.borderSize = 1});
 
   @override
@@ -221,12 +227,15 @@ class SearchDropListState extends State<SearchDropList>
                   height: widget.heightBottomContainer ?? 250,
                   margin: const EdgeInsets.only(bottom: 20, left: 2, right: 2),
                   padding: const EdgeInsets.only(bottom: 20),
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(10),
-                        bottomRight: Radius.circular(10)),
-                    color: Colors.white,
-                    boxShadow: [
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                        color: widget.dropboxborderColor ?? Colors.grey),
+                    borderRadius: widget.dropbBoxborderRadius ??
+                        const BorderRadius.only(
+                            bottomLeft: Radius.circular(10),
+                            bottomRight: Radius.circular(10)),
+                    color: widget.dropboxColor ?? Colors.white,
+                    boxShadow: const [
                       BoxShadow(
                           blurRadius: 2,
                           color: Colors.black26,
