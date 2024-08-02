@@ -108,6 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
               showIcon: false,
               showBorder: true,
               enable: true,
+              showCrossIcon: false,
               paddingTop: 0,
               submitText: "OK",
               onTapCross: (data) {

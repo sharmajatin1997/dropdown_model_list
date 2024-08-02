@@ -7,6 +7,7 @@ class SelectDropMultipleList extends StatefulWidget {
   final Function(List<OptionItem> optionItem) onOptionListSelected;
   final Function(bool cancel)? onTapCross;
   final bool showIcon;
+  final bool showCrossIcon;
   final double paddingLeft;
   final double paddingRight;
   final double paddingTop;
@@ -57,6 +58,7 @@ class SelectDropMultipleList extends StatefulWidget {
       this.textColorItem,
       this.textSizeItem = 14,
       this.showBorder = true,
+      this.showCrossIcon = true,
       this.enable = true,
       this.width,
       this.borderRadius,
@@ -195,38 +197,42 @@ class SelectDropMultipleListState extends State<SelectDropMultipleList>
                   ),
                 )),
                 Visibility(
-                  visible: isShowCross,
-                  child: Align(
-                    alignment: const Alignment(1, 0),
-                    child: GestureDetector(
-                      onTap: () {
-                        // isShow = !isShow;
-                        // _runExpandCheck();
-                        // setState(() {});
-                        isShowCross = false;
+                  visible: widget.showCrossIcon,
+                  child: Visibility(
+                    visible: isShowCross,
+                    child: Align(
+                      alignment: const Alignment(1, 0),
+                      child: GestureDetector(
+                        onTap: () {
+                          // isShow = !isShow;
+                          // _runExpandCheck();
+                          // setState(() {});
+                          isShowCross = false;
 
-                        final tagName = optionItemSelected.id;
-                        final split = tagName?.split(',');
-                        for (int i = 0; i < split!.length; i++) {
-                          if (!select.contains(split[i])) {
-                            select.add(split[i]);
+                          final tagName = optionItemSelected.id;
+                          final split = tagName?.split(',');
+                          for (int i = 0; i < split!.length; i++) {
+                            if (!select.contains(split[i])) {
+                              select.add(split[i]);
+                            }
                           }
-                        }
 
-                        for (var item in widget.dropListModel.listOptionItems) {
-                          if (select.contains(item.id)) {
-                            selectedItems.remove(item);
-                            select.remove(item.id!);
+                          for (var item
+                              in widget.dropListModel.listOptionItems) {
+                            if (select.contains(item.id)) {
+                              selectedItems.remove(item);
+                              select.remove(item.id!);
+                            }
                           }
-                        }
-                        optionItemSelected = widget.defaultText;
-                        widget.onTapCross!(true);
-                        setState(() {});
-                      },
-                      child: const Icon(
-                        Icons.close,
-                        color: Colors.black,
-                        size: 20,
+                          optionItemSelected = widget.defaultText;
+                          widget.onTapCross!(true);
+                          setState(() {});
+                        },
+                        child: const Icon(
+                          Icons.close,
+                          color: Colors.black,
+                          size: 20,
+                        ),
                       ),
                     ),
                   ),
