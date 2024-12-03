@@ -1,3 +1,3 @@
-## 2.1.3
+## 2.1.4
 
-* Enable True or False added in all Dropdown and Show cross icon in multi selection.
+* Bug Fixes.
