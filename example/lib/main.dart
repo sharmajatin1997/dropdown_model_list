@@ -59,26 +59,6 @@ class _MyHomePageState extends State<MyHomePage> {
         padding: const EdgeInsets.only(top: 20),
         child: Column(
           children: <Widget>[
-            ///Simple DropDown
-            SelectDropList(
-              itemSelected: optionItemSelected,
-              dropListModel: dropListModel,
-              showIcon: false,
-              showArrowIcon: true,
-              showBorder: true,
-              enable: true,
-              paddingTop: 0,
-              paddingDropItem: const EdgeInsets.only(
-                  left: 20, top: 10, bottom: 10, right: 20),
-              suffixIcon: Icons.arrow_drop_down,
-              containerPadding: const EdgeInsets.all(10),
-              icon: const Icon(Icons.person, color: Colors.black),
-              onOptionSelected: (optionItem) {
-                optionItemSelected = optionItem;
-                setState(() {});
-              },
-            ),
-
             ///Search DropDown
             SearchDropList(
               itemSelected: optionItemSelected,
