@@ -126,11 +126,6 @@ class _SingleSelectionPageState extends State<SingleSelection> {
 ## Image of Single Selection DropDown
 <img width="1024" height="1024" alt="single_selection" src="https://github.com/user-attachments/assets/2a313e7d-a789-4f71-8dce-8eba08d45625" />
 
-## Video of Single Selection DropDown
-In this video you can see how dropdown will work.
-
-https://github.com/user-attachments/assets/232f9871-256b-4401-a51a-b1098401e438
-
 ## Example of Search DropDown
 
 ```
@@ -227,11 +222,6 @@ class _SearchSingleSelectionPageState extends State<SearchSingleSelection> {
 ```
 ## Image of Search DropDown
 <img width="1024" height="1024" alt="search_dropdown" src="https://github.com/user-attachments/assets/01141fb4-581c-41a3-9396-b7e8e3f56661" />
-
-## Video of Search DropDown
-In this video you can see how search dropdown will work.
-
-https://github.com/user-attachments/assets/c6bf3f90-662c-4474-ad38-e3972b099e0f
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
