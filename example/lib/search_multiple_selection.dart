@@ -69,11 +69,6 @@ class _SearchMultipleSelectionPageState extends State<SearchMultipleSelection> {
               onClear: _onClearSelection,
               showBorder: false,
               enable: true,
-              doneButton: Container(
-                height: 30,
-                width: 100,
-                color: Colors.red,
-              ),
               borderSize: 1,
               // 👇 Track selected items
               selectedItems: selectedUsers,
