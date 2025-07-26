@@ -77,7 +77,8 @@ class SelectDropList<T> extends StatefulWidget {
     this.dropboxColor,
     this.scrollThumbColor,
     this.scrollThickness,
-    this.scrollRadius, this.padding,
+    this.scrollRadius,
+    this.padding,
   });
 
   @override
@@ -132,16 +133,21 @@ class SelectDropListState<T> extends State<SelectDropList<T>> {
         child: CompositedTransformFollower(
           link: _layerLink,
           showWhenUnlinked: false,
-          offset:widget.height!=null? Offset(0, widget.height!+10):Offset(0, 60),
+          offset: widget.height != null
+              ? Offset(0, widget.height! + 10)
+              : Offset(0, 60),
           child: Material(
             elevation: 4,
-            borderRadius: widget.dropBoxBorderRadius ?? BorderRadius.circular(10),
+            borderRadius:
+                widget.dropBoxBorderRadius ?? BorderRadius.circular(10),
             child: Container(
               height: widget.heightBottomContainer,
               decoration: BoxDecoration(
                 color: widget.dropboxColor ?? Colors.white,
-                border: Border.all(color: widget.dropBoxBorderColor ?? Colors.grey),
-                borderRadius: widget.dropBoxBorderRadius ?? BorderRadius.circular(10),
+                border:
+                    Border.all(color: widget.dropBoxBorderColor ?? Colors.grey),
+                borderRadius:
+                    widget.dropBoxBorderRadius ?? BorderRadius.circular(10),
               ),
               child: RawScrollbar(
                 controller: scrollController,
@@ -152,7 +158,9 @@ class SelectDropListState<T> extends State<SelectDropList<T>> {
                 child: SingleChildScrollView(
                   controller: scrollController,
                   child: Column(
-                    children: widget.dropListModel.listOptionItems.map((item) => _buildSubMenu(item)).toList(),
+                    children: widget.dropListModel.listOptionItems
+                        .map((item) => _buildSubMenu(item))
+                        .toList(),
                   ),
                 ),
               ),
@@ -207,23 +215,31 @@ class SelectDropListState<T> extends State<SelectDropList<T>> {
         child: Container(
           height: widget.height ?? 50,
           width: widget.width ?? MediaQuery.of(context).size.width,
-          padding: widget.containerPadding ?? const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          padding: widget.containerPadding ??
+              const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
           margin: widget.containerMargin ?? const EdgeInsets.only(top: 10),
           decoration: widget.showBorder
               ? widget.containerDecoration ??
-              BoxDecoration(
-                borderRadius: widget.borderRadius ?? BorderRadius.circular(10),
-                border: Border.all(color: widget.borderColor ?? Colors.black, width: widget.borderSize),
-                color: Colors.white,
-              )
+                  BoxDecoration(
+                    borderRadius:
+                        widget.borderRadius ?? BorderRadius.circular(10),
+                    border: Border.all(
+                        color: widget.borderColor ?? Colors.black,
+                        width: widget.borderSize),
+                    color: Colors.white,
+                  )
               : widget.containerDecoration ??
-              BoxDecoration(
-                borderRadius: widget.borderRadius ?? BorderRadius.circular(10),
-                color: Colors.white,
-                boxShadow: widget.boxShadow ?? [
-                  BoxShadow(blurRadius: 2, color: widget.shadowColor ?? Colors.black26),
-                ],
-              ),
+                  BoxDecoration(
+                    borderRadius:
+                        widget.borderRadius ?? BorderRadius.circular(10),
+                    color: Colors.white,
+                    boxShadow: widget.boxShadow ??
+                        [
+                          BoxShadow(
+                              blurRadius: 2,
+                              color: widget.shadowColor ?? Colors.black26),
+                        ],
+                  ),
           child: Row(
             children: [
               if (widget.showIcon)
@@ -244,7 +260,8 @@ class SelectDropListState<T> extends State<SelectDropList<T>> {
                 GestureDetector(
                   onTap: () {
                     setState(() {
-                      optionItemSelected = OptionItems<T>(model: null, displayTitle: widget.hintText);
+                      optionItemSelected = OptionItems<T>(
+                          model: null, displayTitle: widget.hintText);
                     });
                     widget.onClear?.call();
                   },
@@ -286,6 +303,5 @@ class OptionItems<T> {
   final T? model;
   final String displayTitle;
 
-  OptionItems({ this.model, required this.displayTitle});
+  OptionItems({this.model, required this.displayTitle});
 }
-

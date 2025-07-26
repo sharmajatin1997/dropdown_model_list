@@ -20,7 +20,7 @@ class SearchDropList<T> extends StatefulWidget {
   final bool showClearButton;
   final VoidCallback? onClear;
   final double? height, width;
-  final EdgeInsetsGeometry? containerPadding,containerMargin;
+  final EdgeInsetsGeometry? containerPadding, containerMargin;
   final Decoration? containerDecoration;
   final bool showBorder;
   final bool enable;
@@ -119,7 +119,9 @@ class _SearchDropListState<T> extends State<SearchDropList<T>> {
           child: CompositedTransformFollower(
             link: _layerLink,
             showWhenUnlinked: false,
-            offset: widget.height!=null?Offset(0, widget.height!+15):const Offset(0, 65),
+            offset: widget.height != null
+                ? Offset(0, widget.height! + 15)
+                : const Offset(0, 65),
             child: Material(
               elevation: 4,
               child: StatefulBuilder(
@@ -145,11 +147,11 @@ class _SearchDropListState<T> extends State<SearchDropList<T>> {
                             focusNode: _searchFocusNode,
                             onChanged: (query) {
                               setState(() {
-                                _localFilteredItems = widget.dropListModel
-                                    .listOptionItems
+                                _localFilteredItems = widget
+                                    .dropListModel.listOptionItems
                                     .where((item) => item.displayTitle
-                                    .toLowerCase()
-                                    .contains(query.toLowerCase()))
+                                        .toLowerCase()
+                                        .contains(query.toLowerCase()))
                                     .toList();
                               });
                               setOverlayState(() {});
@@ -159,16 +161,16 @@ class _SearchDropListState<T> extends State<SearchDropList<T>> {
                               prefixIcon: const Icon(Icons.search),
                               suffixIcon: _searchController.text.isNotEmpty
                                   ? IconButton(
-                                icon: const Icon(Icons.clear),
-                                onPressed: () {
-                                  _searchController.clear();
-                                  setState(() {
-                                    _localFilteredItems = widget
-                                        .dropListModel.listOptionItems;
-                                  });
-                                  setOverlayState(() {});
-                                },
-                              )
+                                      icon: const Icon(Icons.clear),
+                                      onPressed: () {
+                                        _searchController.clear();
+                                        setState(() {
+                                          _localFilteredItems = widget
+                                              .dropListModel.listOptionItems;
+                                        });
+                                        setOverlayState(() {});
+                                      },
+                                    )
                                   : null,
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8.0),
@@ -183,10 +185,9 @@ class _SearchDropListState<T> extends State<SearchDropList<T>> {
                           child: RawScrollbar(
                             controller: scrollController,
                             thumbVisibility: true,
-                            thumbColor:
-                            widget.scrollThumbColor ?? Colors.blue,
+                            thumbColor: widget.scrollThumbColor ?? Colors.blue,
                             radius:
-                            widget.scrollRadius ?? const Radius.circular(4),
+                                widget.scrollRadius ?? const Radius.circular(4),
                             thickness: widget.scrollThickness ?? 3,
                             child: ListView.builder(
                               controller: scrollController,
@@ -198,8 +199,8 @@ class _SearchDropListState<T> extends State<SearchDropList<T>> {
                                   title: Text(
                                     item.displayTitle,
                                     style: TextStyle(
-                                      color: widget.textColorItem ??
-                                          Colors.black,
+                                      color:
+                                          widget.textColorItem ?? Colors.black,
                                     ),
                                   ),
                                   onTap: () {
@@ -246,23 +247,31 @@ class _SearchDropListState<T> extends State<SearchDropList<T>> {
         child: Container(
           height: widget.height ?? 50,
           width: widget.width ?? MediaQuery.of(context).size.width,
-          padding: widget.containerPadding ?? const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          padding: widget.containerPadding ??
+              const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
           margin: widget.containerMargin ?? const EdgeInsets.only(top: 10),
           decoration: widget.showBorder
               ? widget.containerDecoration ??
-              BoxDecoration(
-                borderRadius: widget.borderRadius ?? BorderRadius.circular(10),
-                border: Border.all(color: widget.borderColor ?? Colors.black, width: widget.borderSize),
-                color: Colors.white,
-              )
+                  BoxDecoration(
+                    borderRadius:
+                        widget.borderRadius ?? BorderRadius.circular(10),
+                    border: Border.all(
+                        color: widget.borderColor ?? Colors.black,
+                        width: widget.borderSize),
+                    color: Colors.white,
+                  )
               : widget.containerDecoration ??
-              BoxDecoration(
-                borderRadius: widget.borderRadius ?? BorderRadius.circular(10),
-                color: Colors.white,
-                boxShadow: widget.boxShadow ?? [
-                  BoxShadow(blurRadius: 2, color: widget.shadowColor ?? Colors.black26),
-                ],
-              ),
+                  BoxDecoration(
+                    borderRadius:
+                        widget.borderRadius ?? BorderRadius.circular(10),
+                    color: Colors.white,
+                    boxShadow: widget.boxShadow ??
+                        [
+                          BoxShadow(
+                              blurRadius: 2,
+                              color: widget.shadowColor ?? Colors.black26),
+                        ],
+                  ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -272,7 +281,8 @@ class _SearchDropListState<T> extends State<SearchDropList<T>> {
                   color: widget.textColorTitle ?? Colors.grey[700],
                 ),
               ),
-              if (widget.showClearButton && widget.itemSelected?.displayTitle != widget.hintText)
+              if (widget.showClearButton &&
+                  widget.itemSelected?.displayTitle != widget.hintText)
                 GestureDetector(
                   onTap: () {
                     widget.onClear?.call();

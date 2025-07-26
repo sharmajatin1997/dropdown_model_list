@@ -20,7 +20,8 @@ class _SingleSelectionPageState extends State<SingleSelection> {
   late DropdownListModel<UserModel> userDropdown;
 
   // Define one reusable placeholder
-  final OptionItems<UserModel> placeholderOption = OptionItems(model: null, displayTitle: "Choose user");
+  final OptionItems<UserModel> placeholderOption =
+      OptionItems(model: null, displayTitle: "Choose user");
 
   @override
   void initState() {
@@ -30,10 +31,12 @@ class _SingleSelectionPageState extends State<SingleSelection> {
 
     // Only actual users in dropdown
     userDropdown = DropdownListModel<UserModel>(
-      users.map((u) => OptionItems<UserModel>(
-        model: u,
-        displayTitle: u.title!,
-      )).toList(),
+      users
+          .map((u) => OptionItems<UserModel>(
+                model: u,
+                displayTitle: u.title!,
+              ))
+          .toList(),
     );
   }
 

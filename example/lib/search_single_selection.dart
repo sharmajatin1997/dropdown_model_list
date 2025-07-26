@@ -6,7 +6,8 @@ class SearchSingleSelection extends StatefulWidget {
   const SearchSingleSelection({super.key});
 
   @override
-  State<SearchSingleSelection> createState() => _SearchSingleSelectionPageState();
+  State<SearchSingleSelection> createState() =>
+      _SearchSingleSelectionPageState();
 }
 
 class _SearchSingleSelectionPageState extends State<SearchSingleSelection> {
@@ -21,7 +22,7 @@ class _SearchSingleSelectionPageState extends State<SearchSingleSelection> {
 
   // Placeholder used to reset the dropdown
   final OptionItemsSearch<UserModel> placeholderOption =
-  OptionItemsSearch(model: null, displayTitle: "Choose user");
+      OptionItemsSearch(model: null, displayTitle: "Choose user");
 
   @override
   void initState() {
@@ -30,8 +31,8 @@ class _SearchSingleSelectionPageState extends State<SearchSingleSelection> {
 
     userDropdown = DropdownSearchListModel<UserModel>(
       users
-          .map((u) =>
-          OptionItemsSearch<UserModel>(model: u, displayTitle: u.title ?? ''))
+          .map((u) => OptionItemsSearch<UserModel>(
+              model: u, displayTitle: u.title ?? ''))
           .toList(),
     );
   }
@@ -42,6 +43,7 @@ class _SearchSingleSelectionPageState extends State<SearchSingleSelection> {
     });
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
