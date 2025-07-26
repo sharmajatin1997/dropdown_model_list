@@ -18,7 +18,7 @@ dart
   dependencies:
     flutter:
       sdk: flutter
-    dropdown_model_list: any
+    dropdown_model_list: latest
 ```
 
 2. Import the package and use it in your App.
@@ -30,273 +30,21 @@ import 'package:dropdown_model_list/dropdown_model_list.dart';
 
 ```
 
-## Short Example
+## Example of Single Selection DropDown
 
 ```
-            
-             ///Search DropDown
-            SearchDropList(
-              itemSelected: optionItemSelected,
-              dropListModel: dropListModel,
-              showIcon: false,
-              showArrowIcon: true,
-              showBorder: true,
-              textEditingController: controller,
-              paddingTop: 0,
-              suffixIcon: Icons.arrow_drop_down,
-              containerPadding: const EdgeInsets.all(10),
-              icon: const Icon(Icons.person, color: Colors.black),
-              onOptionSelected: (optionItem) {
-                optionItemSelected = optionItem;
-                if (kDebugMode) {
-                  print(optionItemSelected.id);
-                }
-                setState(() {});
-              },
-            ),
-            
-            ///Multiple Selection DropDown
-            SelectDropMultipleList(
-              defaultText: optionItemSelected,
-              dropListModel: dropListModel,
-              showIcon: false,
-              showBorder: true,
-              paddingTop: 0,
-              submitText: "OK",
-              colorSubmitButton: Colors.amber,
-              selectedIconWidget: Container(
-                decoration: const BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.amber),
-                child: const Icon(
-                  Icons.done,
-                  size: 15,
-                  color: Colors.white,
-                ),
-              ),
-              suffixIcon: Icons.arrow_drop_down,
-              containerPadding: const EdgeInsets.all(10),
-              icon: const Icon(Icons.person, color: Colors.black),
-              onOptionListSelected: (list) {
-                for (var data in list) {
-                  if (data.id != null) {
-                    if (kDebugMode) {
-                      print(data.id);
-                    }
-                  }
-                }
-                setState(() {});
-              },
-            ),
-            
-            ///Radio Selection DropDown
-            SelectDropRadio(
-              defaultText: optionItemSelected,
-              dropListModel: dropListModel,
-              showIcon: false,
-              showBorder: true,
-              paddingTop: 0,
-              submitText: "OK",
-              colorSubmitButton: Colors.amber,
-              selectedRadioColor: Colors.amber,
-              suffixIcon: Icons.arrow_drop_down,
-              containerPadding: const EdgeInsets.all(10),
-              icon: const Icon(Icons.person, color: Colors.black),
-              onOptionListSelected: (data) {
-                print(data.title);
-                setState(() {});
-              },
-            ),
-```
-
-## Example
-
-```
-import 'package:dropdown_model_list/dropdown_model_list.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'DropDown Menu',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'DropDown Menu'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  DropListModel dropListModel = DropListModel([
-    OptionItem(id: "1", title: "Jatin Sharma", data: 'CSE Student'),
-    OptionItem(id: "2", title: "Puneet Chand", data: 'CSE Student'),
-    OptionItem(id: "3", title: "Vikas Bhardwaj", data: 'CSE Student'),
-    OptionItem(id: "4", title: "Rakesh Kumar", data: 'CSE Student'),
-    OptionItem(id: "5", title: "Alok Dubey", data: 'CSE Student'),
-    OptionItem(id: "6", title: "Kiran Yadav", data: 'CSE Student'),
-    OptionItem(id: "7", title: "Pradeep Kumar", data: 'CSE Student'),
-    OptionItem(id: "8", title: "Amit Kumar", data: 'CSE Student'),
-    OptionItem(id: "9", title: "Shweta Sharma", data: 'CSE Student'),
-    OptionItem(id: "10", title: "Ankit Bhist", data: 'CSE Student'),
-  ]);
-  OptionItem optionItemSelected = OptionItem(title: "Select User");
-
-  TextEditingController controller = TextEditingController();
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 20),
-        child: Column(
-          children: <Widget>[
-
-            ///Search DropDown
-            SearchDropList(
-              itemSelected: optionItemSelected,
-              dropListModel: dropListModel,
-              showIcon: false,
-              showArrowIcon: true,
-              showBorder: true,
-              enable: true,
-              textEditingController: controller,
-              paddingTop: 0,
-              suffixIcon: Icons.arrow_drop_down,
-              containerPadding: const EdgeInsets.all(10),
-              icon: const Icon(Icons.person, color: Colors.black),
-              onOptionSelected: (optionItem) {
-                optionItemSelected = optionItem;
-                if (kDebugMode) {
-                  print(optionItemSelected.id);
-                }
-                setState(() {});
-              },
-            ),
-
-            ///Multiple Selection DropDown
-            SelectDropMultipleList(
-              defaultText: optionItemSelected,
-              dropListModel: dropListModel,
-              showIcon: false,
-              showBorder: true,
-              enable: true,
-              paddingTop: 0,
-              submitText: "OK",
-              onTapCross: (data) {
-                if (data) {
-                  print("List Clear");
-                }
-              },
-              colorSubmitButton: Colors.amber,
-              selectedIconWidget: Container(
-                decoration: const BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.amber),
-                child: const Icon(
-                  Icons.done,
-                  size: 15,
-                  color: Colors.white,
-                ),
-              ),
-              suffixIcon: Icons.arrow_drop_down,
-              containerPadding: const EdgeInsets.all(10),
-              icon: const Icon(Icons.person, color: Colors.black),
-              onOptionListSelected: (list) {
-                for (var data in list) {
-                  if (data.id != null) {
-                    if (kDebugMode) {
-                      print(data.id);
-                    }
-                  }
-                }
-                setState(() {});
-              },
-            ),
-
-            ///Radio Selection DropDown
-            SelectDropRadio(
-              defaultText: optionItemSelected,
-              dropListModel: dropListModel,
-              showIcon: false,
-              showBorder: true,
-              paddingTop: 0,
-              enable: true,
-              submitText: "OK",
-              colorSubmitButton: Colors.amber,
-              selectedRadioColor: Colors.amber,
-              suffixIcon: Icons.arrow_drop_down,
-              containerPadding: const EdgeInsets.all(10),
-              icon: const Icon(Icons.person, color: Colors.black),
-              onOptionListSelected: (data) {
-                print(data.title);
-                setState(() {});
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-```
-## Example Select Drop Down
-```
-import 'package:dropdown_model_list/drop_down/drop_model.dart';
-import 'package:dropdown_model_list/dropdown_model_list.dart';
+import 'package:dropdown_model_list/drop_down/select_drop_list.dart';
 import 'package:example/model/userModel.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class SingleSelection extends StatefulWidget {
+  const SingleSelection({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'DropDown Menu',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'DropDown Menu'),
-    );
-  }
+  State<SingleSelection> createState() => _SingleSelectionPageState();
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
+class _SingleSelectionPageState extends State<SingleSelection> {
   final users = [
     UserModel(id: '1', title: 'Alice'),
     UserModel(id: '2', title: 'Bob'),
@@ -328,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: const Text('Single Selection DropDown'),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
       body: Padding(
@@ -372,7 +120,113 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+            
 ```
+## Video of Single Selection DropDown
+In this video you can see how dropdown will work.
+
+https://github.com/user-attachments/assets/232f9871-256b-4401-a51a-b1098401e438
+
+
+## Example of Search DropDown
+
+```
+import 'package:dropdown_model_list/drop_down/search_drop_list.dart';
+import 'package:example/model/userModel.dart';
+import 'package:flutter/material.dart';
+
+class SearchSingleSelection extends StatefulWidget {
+  const SearchSingleSelection({super.key});
+
+  @override
+  State<SearchSingleSelection> createState() => _SearchSingleSelectionPageState();
+}
+
+class _SearchSingleSelectionPageState extends State<SearchSingleSelection> {
+  final users = [
+    UserModel(id: '1', title: 'Alice'),
+    UserModel(id: '2', title: 'Bob'),
+    UserModel(id: '3', title: 'Charlie'),
+  ];
+
+  OptionItemsSearch<UserModel>? selectedUser;
+  late DropdownSearchListModel<UserModel> userDropdown;
+
+  // Placeholder used to reset the dropdown
+  final OptionItemsSearch<UserModel> placeholderOption =
+  OptionItemsSearch(model: null, displayTitle: "Choose user");
+
+  @override
+  void initState() {
+    super.initState();
+    selectedUser = placeholderOption;
+
+    userDropdown = DropdownSearchListModel<UserModel>(
+      users
+          .map((u) =>
+          OptionItemsSearch<UserModel>(model: u, displayTitle: u.title ?? ''))
+          .toList(),
+    );
+  }
+
+  void _onClearSelection() {
+    setState(() {
+      selectedUser = placeholderOption;
+    });
+  }
+
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Search DropDown'),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          children: [
+            /// Custom Search Dropdown
+            SearchDropList<UserModel>(
+              itemSelected: selectedUser,
+              dropListModel: userDropdown,
+              onOptionSelected: (optionItem) {
+                setState(() {
+                  selectedUser = optionItem;
+                });
+              },
+              hintText: "Choose user",
+              showArrowIcon: true,
+              textColorTitle: Colors.black,
+              textColorItem: Colors.black,
+              dropboxColor: Colors.white,
+              dropBoxBorderColor: Colors.grey,
+              scrollThumbColor: Colors.blue,
+              showClearButton: true,
+              onClear: _onClearSelection,
+              showBorder: false,
+              enable: true,
+              borderSize: 1,
+            ),
+
+            const SizedBox(height: 20),
+
+            /// Clear Button (optional if showClearButton is used)
+            ElevatedButton(
+              onPressed: _onClearSelection,
+              child: const Text("Clear Selected User"),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
+## Video of Search DropDown
+In this video you can see how search dropdown will work.
+
+https://github.com/user-attachments/assets/c6bf3f90-662c-4474-ad38-e3972b099e0f
+
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
