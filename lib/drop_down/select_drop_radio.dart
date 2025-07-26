@@ -1,4 +1,4 @@
-import 'package:dropdown_model_list/drop_down/models/model.dart';
+import 'package:dropdown_model_list/drop_down/model.dart';
 import 'package:dropdown_model_list/generated/assets.dart';
 import 'package:flutter/material.dart';
 

@@ -1,4 +1,6 @@
 import 'package:dropdown_model_list/dropdown_model_list.dart';
+import 'package:example/search_single_selection.dart';
+import 'package:example/single_selection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +19,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'DropDown Menu'),
+      home:const SearchSingleSelection(),
     );
   }
 }
@@ -59,27 +61,6 @@ class _MyHomePageState extends State<MyHomePage> {
         padding: const EdgeInsets.only(top: 20),
         child: Column(
           children: <Widget>[
-            ///Search DropDown
-            SearchDropList(
-              itemSelected: optionItemSelected,
-              dropListModel: dropListModel,
-              showIcon: false,
-              showArrowIcon: true,
-              showBorder: true,
-              enable: true,
-              textEditingController: controller,
-              paddingTop: 0,
-              suffixIcon: Icons.arrow_drop_down,
-              containerPadding: const EdgeInsets.all(10),
-              icon: const Icon(Icons.person, color: Colors.black),
-              onOptionSelected: (optionItem) {
-                optionItemSelected = optionItem;
-                if (kDebugMode) {
-                  print(optionItemSelected.id);
-                }
-                setState(() {});
-              },
-            ),
 
             ///Multiple Selection DropDown
             SelectDropMultipleList(
