@@ -1,16 +1,12 @@
-import 'package:dropdown_model_list/drop_down/model.dart';
 import 'package:flutter/material.dart';
 
-class SelectDropList extends StatefulWidget {
-  final OptionItem itemSelected;
-  final DropListModel dropListModel;
-  final Function(OptionItem optionItem) onOptionSelected;
+class SelectDropList<T> extends StatefulWidget {
+  final OptionItems<T>? itemSelected;
+  final DropdownListModel<T> dropListModel;
+  final Function(OptionItems<T>) onOptionSelected;
+  final String hintText;
   final bool showIcon;
   final bool showArrowIcon;
-  final double paddingLeft;
-  final double paddingRight;
-  final double paddingTop;
-  final double paddingBottom;
   final Widget? icon;
   final double arrowIconSize;
   final Color? arrowColor;
@@ -32,22 +28,27 @@ class SelectDropList extends StatefulWidget {
   final Decoration? containerDecoration;
   final double? heightBottomContainer;
   final IconData? suffixIcon;
+  final EdgeInsetsGeometry? padding;
   final EdgeInsetsGeometry? paddingDropItem;
-  final Color? dropboxborderColor;
+  final Color? dropBoxBorderColor;
   final Color? dropboxColor;
-  final BorderRadiusGeometry? dropbBoxborderRadius;
+  final BorderRadiusGeometry? dropBoxBorderRadius;
+  final Color? scrollThumbColor;
+  final double? scrollThickness;
+  final Radius? scrollRadius;
+  final VoidCallback? onClear;
+  final bool showClearButton;
 
   const SelectDropList({
     super.key,
     required this.itemSelected,
     required this.dropListModel,
-    required this.showIcon,
-    required this.showArrowIcon,
     required this.onOptionSelected,
-    this.paddingLeft = 20,
-    this.paddingRight = 20,
-    this.paddingTop = 20,
-    this.paddingBottom = 20,
+    required this.hintText,
+    this.onClear,
+    this.showClearButton = false,
+    this.showIcon = false,
+    this.showArrowIcon = true,
     this.icon,
     this.arrowIconSize = 20,
     this.textColorTitle,
@@ -71,231 +72,220 @@ class SelectDropList extends StatefulWidget {
     this.suffixIcon,
     this.containerMargin,
     this.borderSize = 1,
-    this.dropbBoxborderRadius,
-    this.dropboxborderColor,
+    this.dropBoxBorderRadius,
+    this.dropBoxBorderColor,
     this.dropboxColor,
+    this.scrollThumbColor,
+    this.scrollThickness,
+    this.scrollRadius, this.padding,
   });
 
   @override
-  SelectDropListState createState() => SelectDropListState();
+  SelectDropListState<T> createState() => SelectDropListState<T>();
 }
 
-class SelectDropListState extends State<SelectDropList>
-    with SingleTickerProviderStateMixin {
-  late OptionItem optionItemSelected;
-  late AnimationController expandController;
-  late Animation<double> animation;
+class SelectDropListState<T> extends State<SelectDropList<T>> {
+  OptionItems<T>? optionItemSelected;
   bool isShow = false;
-  final scrollController = ScrollController(initialScrollOffset: 0);
+  final scrollController = ScrollController();
+  final LayerLink _layerLink = LayerLink();
+  OverlayEntry? _overlayEntry;
 
   @override
   void initState() {
     super.initState();
-    optionItemSelected = OptionItem(
-        id: widget.itemSelected.id,
-        title: widget.itemSelected.title,
-        data: widget.itemSelected.data);
-    expandController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 350));
-    animation = CurvedAnimation(
-      parent: expandController,
-      curve: Curves.linear,
-    );
-    _runExpandCheck();
+    optionItemSelected = widget.itemSelected;
   }
 
-  void _runExpandCheck() {
-    if (isShow) {
-      expandController.forward();
+  void _toggleOverlay() {
+    if (!isShow) {
+      if (widget.dropListModel.listOptionItems.isEmpty) return;
+      _showOverlay();
+      setState(() => isShow = true);
     } else {
-      expandController.reverse();
+      _removeOverlay();
     }
+  }
+
+  void _showOverlay() {
+    if (_overlayEntry != null) return;
+    _overlayEntry = _createOverlayEntry();
+    Overlay.of(context).insert(_overlayEntry!);
+  }
+
+  void _removeOverlay() {
+    _overlayEntry?.remove();
+    _overlayEntry = null;
+    setState(() => isShow = false);
+  }
+
+  OverlayEntry _createOverlayEntry() {
+    RenderBox renderBox = context.findRenderObject() as RenderBox;
+    Offset offset = renderBox.localToGlobal(Offset.zero);
+    Size size = renderBox.size;
+
+    return OverlayEntry(
+      builder: (context) => Positioned(
+        left: offset.dx,
+        top: offset.dy + size.height,
+        width: size.width,
+        child: CompositedTransformFollower(
+          link: _layerLink,
+          showWhenUnlinked: false,
+          offset:widget.height!=null? Offset(0, widget.height!+10):Offset(0, 60),
+          child: Material(
+            elevation: 4,
+            borderRadius: widget.dropBoxBorderRadius ?? BorderRadius.circular(10),
+            child: Container(
+              height: widget.heightBottomContainer,
+              decoration: BoxDecoration(
+                color: widget.dropboxColor ?? Colors.white,
+                border: Border.all(color: widget.dropBoxBorderColor ?? Colors.grey),
+                borderRadius: widget.dropBoxBorderRadius ?? BorderRadius.circular(10),
+              ),
+              child: RawScrollbar(
+                controller: scrollController,
+                thumbVisibility: true,
+                thumbColor: widget.scrollThumbColor ?? Colors.black,
+                radius: widget.scrollRadius ?? Radius.circular(4),
+                thickness: widget.scrollThickness ?? 3,
+                child: SingleChildScrollView(
+                  controller: scrollController,
+                  child: Column(
+                    children: widget.dropListModel.listOptionItems.map((item) => _buildSubMenu(item)).toList(),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSubMenu(OptionItems<T> item) {
+    return Padding(
+      padding: widget.paddingDropItem ?? const EdgeInsets.all(15),
+      child: GestureDetector(
+        onTap: () {
+          optionItemSelected = item;
+          _removeOverlay();
+          widget.onOptionSelected(item);
+          setState(() {});
+        },
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(
+                item.displayTitle,
+                style: TextStyle(
+                  color: widget.textColorItem ?? Colors.black,
+                  fontSize: widget.textSizeItem,
+                ),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   @override
   void dispose() {
-    expandController.dispose();
+    _removeOverlay();
+    scrollController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-          left: widget.paddingLeft,
-          right: widget.paddingRight,
-          top: widget.paddingTop,
-          bottom: widget.paddingBottom),
-      child: Column(
-        children: <Widget>[
-          Container(
-            height: widget.height ?? 50,
-            width: widget.width ?? MediaQuery.of(context).size.width,
-            padding: widget.containerPadding ??
-                const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-            margin: widget.containerMargin ?? const EdgeInsets.only(top: 10),
-            decoration: widget.showBorder
-                ? widget.containerDecoration ??
-                    BoxDecoration(
-                      borderRadius:
-                          widget.borderRadius ?? BorderRadius.circular(10.0),
-                      border: Border.all(
-                          color: widget.borderColor ?? Colors.black,
-                          width: widget.borderSize),
-                      color: Colors.white,
-                    )
-                : widget.containerDecoration ??
-                    BoxDecoration(
-                      borderRadius:
-                          widget.borderRadius ?? BorderRadius.circular(10.0),
-                      color: Colors.white,
-                      boxShadow: widget.boxShadow ??
-                          [
-                            BoxShadow(
-                                blurRadius: 2,
-                                color: widget.shadowColor ?? Colors.black26,
-                                offset: const Offset(0, 0))
-                          ],
-                    ),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Visibility(
-                    visible: widget.showIcon,
-                    child: widget.icon != null
-                        ? widget.icon!
-                        : const Icon(
-                            Icons.menu,
-                            color: Colors.black,
-                          )),
-                const SizedBox(
-                  width: 10,
-                ),
-                Expanded(
-                    child: GestureDetector(
-                  onTap: () {
-                    if (widget.enable) {
-                      isShow = !isShow;
-                      _runExpandCheck();
-                    }
-                    setState(() {});
-                  },
-                  child: Text(
-                    optionItemSelected.title,
-                    style: TextStyle(
-                        color: optionItemSelected.id == '0' ||
-                                optionItemSelected.id == null
-                            ? widget.hintColorTitle ?? Colors.grey
-                            : widget.textColorTitle ?? Colors.black,
-                        fontSize: widget.textSizeTitle),
-                  ),
-                )),
-                Visibility(
-                  visible: widget.showArrowIcon,
-                  child: Align(
-                    alignment: const Alignment(1, 0),
-                    child: GestureDetector(
-                      onTap: () {
-                        isShow = !isShow;
-                        _runExpandCheck();
-                        setState(() {});
-                      },
-                      child: Icon(
-                        isShow
-                            ? Icons.arrow_drop_down
-                            : widget.suffixIcon ?? Icons.arrow_right,
-                        color: widget.arrowColor ?? Colors.black,
-                        size: widget.arrowIconSize,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 5),
-          SizeTransition(
-              axisAlignment: 1.0,
-              sizeFactor: animation,
-              child: Container(
-                  height: widget.heightBottomContainer ?? 200,
-                  margin: const EdgeInsets.only(bottom: 20, left: 2, right: 2),
-                  padding: const EdgeInsets.only(bottom: 20),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                        color: widget.dropboxborderColor ?? Colors.grey),
-                    borderRadius: widget.dropbBoxborderRadius ??
-                        const BorderRadius.only(
-                            bottomLeft: Radius.circular(10),
-                            bottomRight: Radius.circular(10)),
-                    color: widget.dropboxColor ?? Colors.white,
-                    boxShadow: const [
-                      BoxShadow(
-                          blurRadius: 2,
-                          color: Colors.black26,
-                          offset: Offset(0, 0))
-                    ],
-                  ),
-                  child: Scrollbar(
-                    thickness: 4,
-                    thumbVisibility: true,
-                    interactive: true,
-                    controller: scrollController,
-                    radius: const Radius.circular(0),
-                    scrollbarOrientation: ScrollbarOrientation.right,
-                    child: SingleChildScrollView(
-                      controller: scrollController,
-                      child: _buildDropListOptions(
-                          widget.dropListModel.listOptionItems,
-                          context,
-                          widget.textColorItem,
-                          widget.textSizeItem),
-                    ),
-                  ))),
-        ],
-      ),
-    );
-  }
-
-  Column _buildDropListOptions(List<OptionItem> items, BuildContext context,
-      Color? textColorItem, double textSizeItem) {
-    return Column(
-      children: items
-          .map((item) =>
-              _buildSubMenu(item, context, textColorItem, textSizeItem))
-          .toList(),
-    );
-  }
-
-  Widget _buildSubMenu(OptionItem item, BuildContext context,
-      Color? textColorItem, double textSizeItem) {
-    return Padding(
-      padding: widget.paddingDropItem ??
-          const EdgeInsets.only(left: 20, top: 15, bottom: 5),
+    return CompositedTransformTarget(
+      link: _layerLink,
       child: GestureDetector(
-        child: Row(
-          children: <Widget>[
-            Expanded(
-              flex: 1,
-              child: Text(item.title,
+        onTap: widget.enable ? _toggleOverlay : null,
+        child: Container(
+          height: widget.height ?? 50,
+          width: widget.width ?? MediaQuery.of(context).size.width,
+          padding: widget.containerPadding ?? const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          margin: widget.containerMargin ?? const EdgeInsets.only(top: 10),
+          decoration: widget.showBorder
+              ? widget.containerDecoration ??
+              BoxDecoration(
+                borderRadius: widget.borderRadius ?? BorderRadius.circular(10),
+                border: Border.all(color: widget.borderColor ?? Colors.black, width: widget.borderSize),
+                color: Colors.white,
+              )
+              : widget.containerDecoration ??
+              BoxDecoration(
+                borderRadius: widget.borderRadius ?? BorderRadius.circular(10),
+                color: Colors.white,
+                boxShadow: widget.boxShadow ?? [
+                  BoxShadow(blurRadius: 2, color: widget.shadowColor ?? Colors.black26),
+                ],
+              ),
+          child: Row(
+            children: [
+              if (widget.showIcon)
+                widget.icon ?? const Icon(Icons.menu, color: Colors.black),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  optionItemSelected?.displayTitle ?? widget.hintText,
                   style: TextStyle(
-                      color: textColorItem ?? Colors.black,
-                      fontWeight: FontWeight.w400,
-                      fontSize: textSizeItem),
-                  maxLines: 3,
-                  textAlign: TextAlign.start,
-                  overflow: TextOverflow.ellipsis),
-            ),
-          ],
+                    color: optionItemSelected == null
+                        ? widget.hintColorTitle ?? Colors.grey
+                        : widget.textColorTitle ?? Colors.black,
+                    fontSize: widget.textSizeTitle,
+                  ),
+                ),
+              ),
+              if (widget.showClearButton && optionItemSelected?.model != null)
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      optionItemSelected = OptionItems<T>(model: null, displayTitle: widget.hintText);
+                    });
+                    widget.onClear?.call();
+                  },
+                  child: Icon(Icons.clear, color: Colors.grey),
+                ),
+              if (widget.showArrowIcon)
+                Icon(
+                  isShow ? Icons.arrow_drop_up : Icons.arrow_drop_down,
+                  color: widget.arrowColor ?? Colors.black,
+                  size: widget.arrowIconSize,
+                ),
+            ],
+          ),
         ),
-        onTap: () {
-          optionItemSelected = item;
-          isShow = false;
-          expandController.reverse();
-          widget.onOptionSelected(item);
-        },
       ),
     );
+  }
+
+  @override
+  void didUpdateWidget(covariant SelectDropList<T> oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // If parent changed the selected item, update local state
+    if (widget.itemSelected != oldWidget.itemSelected) {
+      setState(() {
+        optionItemSelected = widget.itemSelected;
+      });
+    }
   }
 }
+
+//Model
+
+class DropdownListModel<T> {
+  final List<OptionItems<T>> listOptionItems;
+  DropdownListModel(this.listOptionItems);
+}
+
+class OptionItems<T> {
+  final T? model;
+  final String displayTitle;
+
+  OptionItems({ this.model, required this.displayTitle});
+}
+

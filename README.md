@@ -33,19 +33,6 @@ import 'package:dropdown_model_list/dropdown_model_list.dart';
 ## Short Example
 
 ```
-            SelectDropList(
-              itemSelected:optionItemSelected,
-              dropListModel:dropListModel,
-              showIcon: true,     // Show Icon in DropDown Title
-              showArrowIcon: true,     // Show Arrow Icon in DropDown
-              showBorder: true,
-              paddingTop: 0,
-              icon: const Icon(Icons.person,color: Colors.black),
-              onOptionSelected:(optionItem){
-                optionItemSelected = optionItem;
-                setState(() {});
-              },
-            )
             
              ///Search DropDown
             SearchDropList(
@@ -121,45 +108,6 @@ import 'package:dropdown_model_list/dropdown_model_list.dart';
             ),
 ```
 
-## Short Example Using Getx
-
-```
-
-    DropListModel dropListContentModel = DropListModel([
-    OptionItem(id: "audio", title: "Audio"),
-    OptionItem(id: "video", title: "Video",),
-    OptionItem(id: "presentation", title: "Presentation"),
-    OptionItem(id: "document", title: "Documents",),
-    ]);
-  
-    var optionItemSelectedContent = OptionItem(title: "Select Content").obs;
-    var contentType = ''.obs;
-     
-    Obx(() =>
-     SelectDropList(
-          hintColorTitle: Colors.black,
-          itemSelected: optionItemSelectedContent.value,
-          dropListModel: dropListContentModel,
-          showIcon: false, // Show Icon in DropDown Title
-          showArrowIcon: true, // Show Arrow Icon in DropDown
-          showBorder: true,
-          borderColor: Colors.grey,
-          suffixIcon: Icons.arrow_drop_down,
-          arrowIconSize: 28,
-          paddingDropItem: 10,
-          paddingBottom: 0,
-          paddingLeft: 0,
-          containerPadding: const EdgeInsets.only(left: 0,right: 10),
-          paddingRight: 0,
-          paddingTop: 0,
-          onOptionSelected: (optionItem) {
-                optionItemSelectedContent.value = optionItem;
-            },
-          )),
-            
-```
-
-
 ## Example
 
 ```
@@ -224,25 +172,6 @@ class _MyHomePageState extends State<MyHomePage> {
         padding: const EdgeInsets.only(top: 20),
         child: Column(
           children: <Widget>[
-            ///Simple DropDown
-            SelectDropList(
-              itemSelected: optionItemSelected,
-              dropListModel: dropListModel,
-              showIcon: false,
-              showArrowIcon: true,
-              showBorder: true,
-              enable: true,
-              paddingTop: 0,
-              paddingDropItem: const EdgeInsets.only(
-                  left: 20, top: 10, bottom: 10, right: 20),
-              suffixIcon: Icons.arrow_drop_down,
-              containerPadding: const EdgeInsets.all(10),
-              icon: const Icon(Icons.person, color: Colors.black),
-              onOptionSelected: (optionItem) {
-                optionItemSelected = optionItem;
-                setState(() {});
-              },
-            ),
 
             ///Search DropDown
             SearchDropList(
@@ -332,10 +261,118 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 ```
-![Simulator Screen Shot - iPhone 14 Plus - 2023-08-21 at 13 05 02](https://github.com/sharmajatin1997/dropdown_model_list/assets/80152469/77679cde-47c5-4793-9c21-42f104803d9b)
-![Screenshot_1693204401](https://github.com/sharmajatin1997/dropdown_model_list/assets/80152469/aa72000e-3d5d-4203-841f-4c6374c9b831)
-![Simulator Screenshot - iPhone 15 Pro Max - 2023-11-27 at 16 09 26](https://github.com/sharmajatin1997/dropdown_model_list/assets/80152469/7f875339-57f6-4050-a16a-15304465a36c)
+## Example Select Drop Down
+```
+import 'package:dropdown_model_list/drop_down/drop_model.dart';
+import 'package:dropdown_model_list/dropdown_model_list.dart';
+import 'package:example/model/userModel.dart';
+import 'package:flutter/material.dart';
 
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'DropDown Menu',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      home: const MyHomePage(title: 'DropDown Menu'),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key, required this.title});
+  final String title;
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final users = [
+    UserModel(id: '1', title: 'Alice'),
+    UserModel(id: '2', title: 'Bob'),
+    UserModel(id: '3', title: 'Charlie'),
+  ];
+
+  OptionItems<UserModel>? selectedUser;
+  late DropdownListModel<UserModel> userDropdown;
+
+  // Define one reusable placeholder
+  final OptionItems<UserModel> placeholderOption = OptionItems(model: null, displayTitle: "Choose user");
+
+  @override
+  void initState() {
+    super.initState();
+    // Start with placeholder shown
+    selectedUser = placeholderOption;
+
+    // Only actual users in dropdown
+    userDropdown = DropdownListModel<UserModel>(
+      users.map((u) => OptionItems<UserModel>(
+        model: u,
+        displayTitle: u.title!,
+      )).toList(),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          children: [
+            /// Dropdown
+            SelectDropList<UserModel>(
+              itemSelected: selectedUser,
+              dropListModel: userDropdown,
+              onOptionSelected: (optionItem) {
+                setState(() {
+                  selectedUser = optionItem;
+                });
+              },
+              hintText: "Choose user",
+              showArrowIcon: true,
+              height: 50,
+              arrowColor: Colors.black,
+              textColorTitle: Colors.black,
+              textColorItem: Colors.black,
+              dropboxColor: Colors.white,
+              dropBoxBorderColor: Colors.grey,
+              scrollThumbColor: Colors.blue,
+            ),
+
+            const SizedBox(height: 20),
+
+            /// Clear button
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  selectedUser = placeholderOption; // 👈 not in list, but shown
+                });
+              },
+              child: const Text("Clear Selected User"),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
