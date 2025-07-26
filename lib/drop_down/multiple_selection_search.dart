@@ -48,6 +48,7 @@ class MultipleSelectionSearchDropList<T> extends StatefulWidget {
   final Decoration? containerDecoration;
   final bool showBorder;
   final bool enable;
+  final bool enableSearch;
   final Color? borderColor;
   final Color? shadowColor;
   final double borderSize;
@@ -90,6 +91,7 @@ class MultipleSelectionSearchDropList<T> extends StatefulWidget {
     this.arrowIconSize = 20,
     this.arrowColor,
     this.doneButton,
+    this.enableSearch=true,
   });
 
   @override
@@ -171,43 +173,46 @@ class _MultipleSelectionSearchDropListState<T> extends State<MultipleSelectionSe
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: TextField(
-                            controller: _searchController,
-                            focusNode: _searchFocusNode,
-                            onChanged: (query) {
-                              setState(() {
-                                _localFilteredItems = widget
-                                    .dropListModel.listOptionItems
-                                    .where((item) => item.displayTitle
-                                    .toLowerCase()
-                                    .contains(query.toLowerCase()))
-                                    .toList();
-                              });
-                              setOverlayState(() {});
-                            },
-                            decoration: InputDecoration(
-                              hintText: 'Search...',
-                              prefixIcon: const Icon(Icons.search),
-                              suffixIcon: _searchController.text.isNotEmpty
-                                  ? IconButton(
-                                icon: const Icon(Icons.clear),
-                                onPressed: () {
-                                  _searchController.clear();
-                                  setState(() {
-                                    _localFilteredItems = widget.dropListModel.listOptionItems;
-                                  });
-                                  setOverlayState(() {});
-                                },
-                              )
-                                  : null,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8.0),
+                        Visibility(
+                          visible: widget.enableSearch,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextField(
+                              controller: _searchController,
+                              focusNode: _searchFocusNode,
+                              onChanged: (query) {
+                                setState(() {
+                                  _localFilteredItems = widget
+                                      .dropListModel.listOptionItems
+                                      .where((item) => item.displayTitle
+                                      .toLowerCase()
+                                      .contains(query.toLowerCase()))
+                                      .toList();
+                                });
+                                setOverlayState(() {});
+                              },
+                              decoration: InputDecoration(
+                                hintText: 'Search...',
+                                prefixIcon: const Icon(Icons.search),
+                                suffixIcon: _searchController.text.isNotEmpty
+                                    ? IconButton(
+                                  icon: const Icon(Icons.clear),
+                                  onPressed: () {
+                                    _searchController.clear();
+                                    setState(() {
+                                      _localFilteredItems = widget.dropListModel.listOptionItems;
+                                    });
+                                    setOverlayState(() {});
+                                  },
+                                )
+                                    : null,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                isDense: true,
+                                contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 12, vertical: 10),
                               ),
-                              isDense: true,
-                              contentPadding: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 10),
                             ),
                           ),
                         ),
@@ -316,7 +321,7 @@ class _MultipleSelectionSearchDropListState<T> extends State<MultipleSelectionSe
                 border: Border.all(
                     color: widget.borderColor ?? Colors.black,
                     width: widget.borderSize),
-                color: Colors.white.withOpacity(0.95),
+                color: Colors.white.withAlpha(230),
               )
               : widget.containerDecoration ??
               BoxDecoration(

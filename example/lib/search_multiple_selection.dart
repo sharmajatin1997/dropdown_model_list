@@ -60,6 +60,7 @@ class _SearchMultipleSelectionPageState extends State<SearchMultipleSelection> {
               hintText: "Choose user",
               showArrowIcon: true,
               height: 60,
+              enableSearch: true, //If you hide search field set false but default its true
               textColorTitle: Colors.black,
               textColorItem: Colors.black,
               dropboxColor: Colors.white,
