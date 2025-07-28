@@ -223,5 +223,117 @@ class _SearchSingleSelectionPageState extends State<SearchSingleSelection> {
 ## Image of Search DropDown
 <img width="1024" height="1024" alt="search_dropdown" src="https://github.com/user-attachments/assets/01141fb4-581c-41a3-9396-b7e8e3f56661" />
 
+## Example of Search DropDown with Multiple selection
+
+```
+import 'package:dropdown_model_list/drop_down/multiple_selection_search.dart';
+import 'package:example/model/userModel.dart';
+import 'package:flutter/material.dart';
+
+class SearchMultipleSelection extends StatefulWidget {
+  const SearchMultipleSelection({super.key});
+
+  @override
+  State<SearchMultipleSelection> createState() =>
+      _SearchMultipleSelectionPageState();
+}
+
+class _SearchMultipleSelectionPageState extends State<SearchMultipleSelection> {
+  final users = [
+    UserModel(id: '1', title: 'Alice'),
+    UserModel(id: '2', title: 'Bob'),
+    UserModel(id: '3', title: 'Charlie'),
+  ];
+
+  late MultiDropdownSearchListModel<UserModel> userDropdown;
+
+  // State for selected users
+  List<OptionItemsMultiSearch<UserModel>> selectedUsers = [];
+
+  @override
+  void initState() {
+    super.initState();
+
+    userDropdown = MultiDropdownSearchListModel<UserModel>(
+      users
+          .map((u) => OptionItemsMultiSearch<UserModel>(
+        model: u,
+        displayTitle: u.title ?? '',
+      ))
+          .toList(),
+    );
+  }
+
+  void _onClearSelection() {
+    setState(() {
+      selectedUsers.clear();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Search DropDown With Multiple selection'),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            /// Custom Search Dropdown
+            MultipleSelectionSearchDropList<UserModel>(
+              dropListModel: userDropdown,
+              hintText: "Choose user",
+              showArrowIcon: true,
+              height: 60,
+              enableSearch: true, //If you hide search field set false but default its true
+              textColorTitle: Colors.black,
+              textColorItem: Colors.black,
+              dropboxColor: Colors.white,
+              dropBoxBorderColor: Colors.grey,
+              scrollThumbColor: Colors.blue,
+              showClearButton: true,
+              onClear: _onClearSelection,
+              showBorder: false,
+              enable: true,
+              borderSize: 1,
+              // 👇 Track selected items
+              selectedItems: selectedUsers,
+              // 👇 Handle new selections
+              onOptionsSelected: (List<OptionItemsMultiSearch<UserModel>> value) {
+                setState(() {
+                  selectedUsers = value;
+                });
+              },
+            ),
+
+            const SizedBox(height: 20),
+
+            ElevatedButton(
+              onPressed: _onClearSelection,
+              child: const Text("Clear Selected User"),
+            ),
+
+            const SizedBox(height: 20),
+
+            /// Display selected values
+            const Text(
+              "Selected Users:",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+            ...selectedUsers.map((user) => Text(user.displayTitle)),
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
+## Image of Search DropDown
+<img width="1024" height="1536" alt="search_with_multiselection" src="https://github.com/user-attachments/assets/b9794921-a839-435a-9810-1a14bde11d06" />
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
