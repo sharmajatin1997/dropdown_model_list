@@ -326,7 +326,7 @@ class _MultipleSelectionSearchDropListState<T> extends State<MultipleSelectionSe
               : widget.containerDecoration ??
               BoxDecoration(
                 borderRadius: widget.borderRadius ?? BorderRadius.circular(10),
-                color: Colors.white.withOpacity(0.95),
+                color: Colors.white.withAlpha(243),
                 boxShadow: widget.boxShadow ?? [
                   BoxShadow(
                     blurRadius: 4,
