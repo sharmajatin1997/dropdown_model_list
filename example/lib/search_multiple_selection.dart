@@ -29,9 +29,9 @@ class _SearchMultipleSelectionPageState extends State<SearchMultipleSelection> {
     userDropdown = MultiDropdownSearchListModel<UserModel>(
       users
           .map((u) => OptionItemsMultiSearch<UserModel>(
-        model: u,
-        displayTitle: u.title ?? '',
-      ))
+                model: u,
+                displayTitle: u.title ?? '',
+              ))
           .toList(),
     );
   }
@@ -60,7 +60,8 @@ class _SearchMultipleSelectionPageState extends State<SearchMultipleSelection> {
               hintText: "Choose user",
               showArrowIcon: true,
               height: 60,
-              enableSearch: true, //If you hide search field set false but default its true
+              enableSearch:
+                  true, //If you hide search field set false but default its true
               textColorTitle: Colors.black,
               textColorItem: Colors.black,
               dropboxColor: Colors.white,
@@ -74,7 +75,8 @@ class _SearchMultipleSelectionPageState extends State<SearchMultipleSelection> {
               // 👇 Track selected items
               selectedItems: selectedUsers,
               // 👇 Handle new selections
-              onOptionsSelected: (List<OptionItemsMultiSearch<UserModel>> value) {
+              onOptionsSelected:
+                  (List<OptionItemsMultiSearch<UserModel>> value) {
                 setState(() {
                   selectedUsers = value;
                 });
@@ -103,4 +105,3 @@ class _SearchMultipleSelectionPageState extends State<SearchMultipleSelection> {
     );
   }
 }
-

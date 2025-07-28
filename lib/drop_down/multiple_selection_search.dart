@@ -16,9 +16,9 @@ class OptionItemsMultiSearch<T> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is OptionItemsMultiSearch<T> &&
-              runtimeType == other.runtimeType &&
-              displayTitle == other.displayTitle;
+      other is OptionItemsMultiSearch<T> &&
+          runtimeType == other.runtimeType &&
+          displayTitle == other.displayTitle;
 
   @override
   int get hashCode => displayTitle.hashCode;
@@ -91,14 +91,16 @@ class MultipleSelectionSearchDropList<T> extends StatefulWidget {
     this.arrowIconSize = 20,
     this.arrowColor,
     this.doneButton,
-    this.enableSearch=true,
+    this.enableSearch = true,
   });
 
   @override
-  State<MultipleSelectionSearchDropList<T>> createState() => _MultipleSelectionSearchDropListState<T>();
+  State<MultipleSelectionSearchDropList<T>> createState() =>
+      _MultipleSelectionSearchDropListState<T>();
 }
 
-class _MultipleSelectionSearchDropListState<T> extends State<MultipleSelectionSearchDropList<T>> {
+class _MultipleSelectionSearchDropListState<T>
+    extends State<MultipleSelectionSearchDropList<T>> {
   final LayerLink _layerLink = LayerLink();
   late TextEditingController _searchController;
   late FocusNode _searchFocusNode;
@@ -185,8 +187,8 @@ class _MultipleSelectionSearchDropListState<T> extends State<MultipleSelectionSe
                                   _localFilteredItems = widget
                                       .dropListModel.listOptionItems
                                       .where((item) => item.displayTitle
-                                      .toLowerCase()
-                                      .contains(query.toLowerCase()))
+                                          .toLowerCase()
+                                          .contains(query.toLowerCase()))
                                       .toList();
                                 });
                                 setOverlayState(() {});
@@ -196,15 +198,16 @@ class _MultipleSelectionSearchDropListState<T> extends State<MultipleSelectionSe
                                 prefixIcon: const Icon(Icons.search),
                                 suffixIcon: _searchController.text.isNotEmpty
                                     ? IconButton(
-                                  icon: const Icon(Icons.clear),
-                                  onPressed: () {
-                                    _searchController.clear();
-                                    setState(() {
-                                      _localFilteredItems = widget.dropListModel.listOptionItems;
-                                    });
-                                    setOverlayState(() {});
-                                  },
-                                )
+                                        icon: const Icon(Icons.clear),
+                                        onPressed: () {
+                                          _searchController.clear();
+                                          setState(() {
+                                            _localFilteredItems = widget
+                                                .dropListModel.listOptionItems;
+                                          });
+                                          setOverlayState(() {});
+                                        },
+                                      )
                                     : null,
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(8.0),
@@ -221,7 +224,8 @@ class _MultipleSelectionSearchDropListState<T> extends State<MultipleSelectionSe
                             controller: scrollController,
                             thumbVisibility: true,
                             thumbColor: widget.scrollThumbColor ?? Colors.blue,
-                            radius: widget.scrollRadius ?? const Radius.circular(4),
+                            radius:
+                                widget.scrollRadius ?? const Radius.circular(4),
                             thickness: widget.scrollThickness ?? 3,
                             child: ListView.builder(
                               controller: scrollController,
@@ -229,7 +233,8 @@ class _MultipleSelectionSearchDropListState<T> extends State<MultipleSelectionSe
                               itemCount: _localFilteredItems.length,
                               itemBuilder: (context, index) {
                                 final item = _localFilteredItems[index];
-                                final isSelected = widget.selectedItems.contains(item);
+                                final isSelected =
+                                    widget.selectedItems.contains(item);
 
                                 return CheckboxListTile(
                                   value: isSelected,
@@ -240,14 +245,16 @@ class _MultipleSelectionSearchDropListState<T> extends State<MultipleSelectionSe
                                       } else {
                                         widget.selectedItems.remove(item);
                                       }
-                                      widget.onOptionsSelected(widget.selectedItems);
+                                      widget.onOptionsSelected(
+                                          widget.selectedItems);
                                     });
                                     setOverlayState(() {});
                                   },
                                   title: Text(
                                     item.displayTitle,
                                     style: TextStyle(
-                                      color: widget.textColorItem ?? Colors.black,
+                                      color:
+                                          widget.textColorItem ?? Colors.black,
                                     ),
                                   ),
                                 );
@@ -259,19 +266,19 @@ class _MultipleSelectionSearchDropListState<T> extends State<MultipleSelectionSe
                           alignment: Alignment.centerRight,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child:GestureDetector(
-                              onTap: (){
+                            child: GestureDetector(
+                              onTap: () {
                                 _closeOverlay();
                                 setState(() {});
                               },
-                              child: widget.doneButton??
+                              child: widget.doneButton ??
                                   ElevatedButton(
-                                onPressed: () {
-                                  _closeOverlay();
-                                  setState(() {});
-                                },
-                                child: const Text('Done'),
-                              ),
+                                    onPressed: () {
+                                      _closeOverlay();
+                                      setState(() {});
+                                    },
+                                    child: const Text('Done'),
+                                  ),
                             ),
                           ),
                         ),
@@ -301,7 +308,7 @@ class _MultipleSelectionSearchDropListState<T> extends State<MultipleSelectionSe
       link: _layerLink,
       child: GestureDetector(
         onTap: () {
-          if(widget.enable){
+          if (widget.enable) {
             if (!isOverlayOpen) {
               _openOverlay();
             } else {
@@ -312,61 +319,67 @@ class _MultipleSelectionSearchDropListState<T> extends State<MultipleSelectionSe
         child: Container(
           height: widget.height ?? 50,
           width: widget.width ?? MediaQuery.of(context).size.width,
-          padding: widget.containerPadding ?? const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+          padding: widget.containerPadding ??
+              const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
           margin: widget.containerMargin ?? const EdgeInsets.only(top: 10),
           decoration: widget.showBorder
               ? widget.containerDecoration ??
-              BoxDecoration(
-                borderRadius: widget.borderRadius ?? BorderRadius.circular(10),
-                border: Border.all(
-                    color: widget.borderColor ?? Colors.black,
-                    width: widget.borderSize),
-                color: Colors.white.withAlpha(230),
-              )
+                  BoxDecoration(
+                    borderRadius:
+                        widget.borderRadius ?? BorderRadius.circular(10),
+                    border: Border.all(
+                        color: widget.borderColor ?? Colors.black,
+                        width: widget.borderSize),
+                    color: Colors.white.withAlpha(230),
+                  )
               : widget.containerDecoration ??
-              BoxDecoration(
-                borderRadius: widget.borderRadius ?? BorderRadius.circular(10),
-                color: Colors.white.withAlpha(243),
-                boxShadow: widget.boxShadow ?? [
-                  BoxShadow(
-                    blurRadius: 4,
-                    offset: const Offset(0, 2),
-                    color: widget.shadowColor ?? Colors.black12,
+                  BoxDecoration(
+                    borderRadius:
+                        widget.borderRadius ?? BorderRadius.circular(10),
+                    color: Colors.white.withAlpha(243),
+                    boxShadow: widget.boxShadow ??
+                        [
+                          BoxShadow(
+                            blurRadius: 4,
+                            offset: const Offset(0, 2),
+                            color: widget.shadowColor ?? Colors.black12,
+                          ),
+                        ],
                   ),
-                ],
-              ),
           child: widget.selectedItems.isNotEmpty
               ? ChipRow(
-            selectedLabels: widget.selectedItems.map((e) => e.displayTitle).toList(),
-            onDelete: (label) {
-              setState(() {
-                widget.selectedItems.removeWhere((e) => e.displayTitle == label);
-                widget.onOptionsSelected(widget.selectedItems);
-              });
-            },
-          )
+                  selectedLabels:
+                      widget.selectedItems.map((e) => e.displayTitle).toList(),
+                  onDelete: (label) {
+                    setState(() {
+                      widget.selectedItems
+                          .removeWhere((e) => e.displayTitle == label);
+                      widget.onOptionsSelected(widget.selectedItems);
+                    });
+                  },
+                )
               : Padding(
-            padding: const EdgeInsets.only(top: 4.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    widget.hintText,
-                    style: TextStyle(
-                      color: widget.textColorTitle ?? Colors.grey.shade600,
-                      fontSize: widget.fontSizeHint ?? 14,
-                    ),
+                  padding: const EdgeInsets.only(top: 4.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          widget.hintText,
+                          style: TextStyle(
+                            color:
+                                widget.textColorTitle ?? Colors.grey.shade600,
+                            fontSize: widget.fontSizeHint ?? 14,
+                          ),
+                        ),
+                      ),
+                      Icon(
+                        Icons.arrow_drop_down,
+                        color: widget.arrowColor ?? Colors.black,
+                        size: widget.arrowIconSize,
+                      ),
+                    ],
                   ),
                 ),
-                Icon(
-                  Icons.arrow_drop_down,
-                  color: widget.arrowColor ?? Colors.black,
-                  size: widget.arrowIconSize,
-                ),
-              ],
-            ),
-          ),
-
         ),
       ),
     );

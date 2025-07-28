@@ -332,7 +332,7 @@ class _SearchMultipleSelectionPageState extends State<SearchMultipleSelection> {
   }
 }
 ```
-## Image of Search DropDown
+## Image of Search DropDown with Multiple selection
 <img width="1024" height="1536" alt="search_with_multiselection" src="https://github.com/user-attachments/assets/b9794921-a839-435a-9810-1a14bde11d06" />
 
 ## Contributing

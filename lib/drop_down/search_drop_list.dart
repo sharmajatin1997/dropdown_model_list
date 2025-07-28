@@ -238,7 +238,7 @@ class _SearchDropListState<T> extends State<SearchDropList<T>> {
       link: _layerLink,
       child: GestureDetector(
         onTap: () {
-          if(widget.enable){
+          if (widget.enable) {
             if (!isOverlayOpen) {
               _openOverlay();
             } else {

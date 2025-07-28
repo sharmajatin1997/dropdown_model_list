@@ -1,3 +1,3 @@
-## 3.0.0
+## 3.0.1
 
-* In this package we update complete code of Single Selection Dropdown and Search Dropdown. Both Dropdown show in Overlay and you can pass Dynamic model according to your requirement
+* In this version we add new feature Search Dropdown with multiple selection.  

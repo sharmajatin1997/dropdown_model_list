@@ -46,9 +46,9 @@ class ChipRow extends StatelessWidget {
       alignment: WrapAlignment.start,
       children: selectedLabels
           .map((label) => MultiSelectChip(
-        label: label,
-        onDeleted: () => onDelete(label),
-      ))
+                label: label,
+                onDeleted: () => onDelete(label),
+              ))
           .toList(),
     );
   }
