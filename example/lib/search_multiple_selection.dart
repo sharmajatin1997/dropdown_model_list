@@ -46,7 +46,7 @@ class _SearchMultipleSelectionPageState extends State<SearchMultipleSelection> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Search DropDown'),
+        title: const Text('Search DropDown With Multiple selection'),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
       body: Padding(

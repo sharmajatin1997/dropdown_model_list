@@ -335,37 +335,35 @@ class _MultipleSelectionSearchDropListState<T> extends State<MultipleSelectionSe
                   ),
                 ],
               ),
-          child: Expanded(
-            child: widget.selectedItems.isNotEmpty
-                ? ChipRow(
-              selectedLabels: widget.selectedItems.map((e) => e.displayTitle).toList(),
-              onDelete: (label) {
-                setState(() {
-                  widget.selectedItems.removeWhere((e) => e.displayTitle == label);
-                  widget.onOptionsSelected(widget.selectedItems);
-                });
-              },
-            )
-                : Padding(
-              padding: const EdgeInsets.only(top: 4.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      widget.hintText,
-                      style: TextStyle(
-                        color: widget.textColorTitle ?? Colors.grey.shade600,
-                        fontSize: widget.fontSizeHint ?? 14,
-                      ),
+          child: widget.selectedItems.isNotEmpty
+              ? ChipRow(
+            selectedLabels: widget.selectedItems.map((e) => e.displayTitle).toList(),
+            onDelete: (label) {
+              setState(() {
+                widget.selectedItems.removeWhere((e) => e.displayTitle == label);
+                widget.onOptionsSelected(widget.selectedItems);
+              });
+            },
+          )
+              : Padding(
+            padding: const EdgeInsets.only(top: 4.0),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    widget.hintText,
+                    style: TextStyle(
+                      color: widget.textColorTitle ?? Colors.grey.shade600,
+                      fontSize: widget.fontSizeHint ?? 14,
                     ),
                   ),
-                  Icon(
-                    Icons.arrow_drop_down,
-                    color: widget.arrowColor ?? Colors.black,
-                    size: widget.arrowIconSize,
-                  ),
-                ],
-              ),
+                ),
+                Icon(
+                  Icons.arrow_drop_down,
+                  color: widget.arrowColor ?? Colors.black,
+                  size: widget.arrowIconSize,
+                ),
+              ],
             ),
           ),
 
