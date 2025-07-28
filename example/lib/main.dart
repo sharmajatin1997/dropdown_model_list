@@ -1,6 +1,5 @@
 import 'package:dropdown_model_list/dropdown_model_list.dart';
-import 'package:example/search_single_selection.dart';
-import 'package:flutter/foundation.dart';
+import 'package:example/search_multiple_selection.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,7 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const SearchSingleSelection(),
+      home: const SearchMultipleSelection(),
     );
   }
 }
@@ -60,46 +59,6 @@ class _MyHomePageState extends State<MyHomePage> {
         padding: const EdgeInsets.only(top: 20),
         child: Column(
           children: <Widget>[
-            ///Multiple Selection DropDown
-            SelectDropMultipleList(
-              defaultText: optionItemSelected,
-              dropListModel: dropListModel,
-              showIcon: false,
-              showBorder: true,
-              enable: true,
-              showCrossIcon: false,
-              paddingTop: 0,
-              submitText: "OK",
-              onTapCross: (data) {
-                if (data) {
-                  print("List Clear");
-                }
-              },
-              colorSubmitButton: Colors.amber,
-              selectedIconWidget: Container(
-                decoration: const BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.amber),
-                child: const Icon(
-                  Icons.done,
-                  size: 15,
-                  color: Colors.white,
-                ),
-              ),
-              suffixIcon: Icons.arrow_drop_down,
-              containerPadding: const EdgeInsets.all(10),
-              icon: const Icon(Icons.person, color: Colors.black),
-              onOptionListSelected: (list) {
-                for (var data in list) {
-                  if (data.id != null) {
-                    if (kDebugMode) {
-                      print(data.id);
-                    }
-                  }
-                }
-                setState(() {});
-              },
-            ),
-
             ///Radio Selection DropDown
             SelectDropRadio(
               defaultText: optionItemSelected,
