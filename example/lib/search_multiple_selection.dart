@@ -1,5 +1,5 @@
 import 'package:dropdown_model_list/drop_down/multiple_selection_search.dart';
-import 'package:example/model/userModel.dart';
+import 'package:example/model/user_model.dart';
 import 'package:flutter/material.dart';
 
 class SearchMultipleSelection extends StatefulWidget {

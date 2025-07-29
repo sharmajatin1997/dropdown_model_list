@@ -1,44 +1,124 @@
 import 'package:flutter/material.dart';
 
+/// A customizable dropdown selection widget.
+///
+/// [SelectDropList] provides a highly configurable dropdown menu with overlay behavior.
+/// It allows for custom styling, scroll behavior, clear/reset option, and optional icons.
 class SelectDropList<T> extends StatefulWidget {
+  /// The currently selected item.
   final OptionItems<T>? itemSelected;
-  final DropdownListModel<T> dropListModel;
-  final Function(OptionItems<T>) onOptionSelected;
-  final String hintText;
-  final bool showIcon;
-  final bool showArrowIcon;
-  final Widget? icon;
-  final double arrowIconSize;
-  final Color? arrowColor;
-  final Color? textColorTitle;
-  final Color? hintColorTitle;
-  final double textSizeTitle;
-  final Color? textColorItem;
-  final double textSizeItem;
-  final bool showBorder;
-  final bool enable;
-  final Color? borderColor;
-  final Color? shadowColor;
-  final double borderSize;
-  final double? height, width;
-  final BorderRadiusGeometry? borderRadius;
-  final List<BoxShadow>? boxShadow;
-  final EdgeInsetsGeometry? containerPadding;
-  final EdgeInsetsGeometry? containerMargin;
-  final Decoration? containerDecoration;
-  final double? heightBottomContainer;
-  final IconData? suffixIcon;
-  final EdgeInsetsGeometry? padding;
-  final EdgeInsetsGeometry? paddingDropItem;
-  final Color? dropBoxBorderColor;
-  final Color? dropboxColor;
-  final BorderRadiusGeometry? dropBoxBorderRadius;
-  final Color? scrollThumbColor;
-  final double? scrollThickness;
-  final Radius? scrollRadius;
-  final VoidCallback? onClear;
-  final bool showClearButton;
 
+  /// The list of selectable items.
+  final DropdownListModel<T> dropListModel;
+
+  /// Callback when an option is selected.
+  final Function(OptionItems<T>) onOptionSelected;
+
+  /// Placeholder text when no option is selected.
+  final String hintText;
+
+  /// Whether to display an icon on the left.
+  final bool showIcon;
+
+  /// Whether to show the arrow icon for dropdown state.
+  final bool showArrowIcon;
+
+  /// Optional leading icon widget.
+  final Widget? icon;
+
+  /// Size of the arrow icon.
+  final double arrowIconSize;
+
+  /// Color of the arrow icon.
+  final Color? arrowColor;
+
+  /// Color of the selected text.
+  final Color? textColorTitle;
+
+  /// Color of the placeholder/hint text.
+  final Color? hintColorTitle;
+
+  /// Font size for selected or hint text.
+  final double textSizeTitle;
+
+  /// Color of dropdown list items.
+  final Color? textColorItem;
+
+  /// Font size of dropdown list items.
+  final double textSizeItem;
+
+  /// Whether to show border around dropdown container.
+  final bool showBorder;
+
+  /// Whether the dropdown is interactable.
+  final bool enable;
+
+  /// Border color of the dropdown.
+  final Color? borderColor;
+
+  /// Shadow color for container.
+  final Color? shadowColor;
+
+  /// Width of the container border.
+  final double borderSize;
+
+  /// Height of the main dropdown button.
+  final double? height;
+
+  /// Width of the dropdown button.
+  final double? width;
+
+  /// Border radius of the dropdown container.
+  final BorderRadiusGeometry? borderRadius;
+
+  /// Box shadows to apply to the dropdown container.
+  final List<BoxShadow>? boxShadow;
+
+  /// Padding inside the dropdown container.
+  final EdgeInsetsGeometry? containerPadding;
+
+  /// Margin around the dropdown container.
+  final EdgeInsetsGeometry? containerMargin;
+
+  /// Custom decoration for the container.
+  final Decoration? containerDecoration;
+
+  /// Height of the dropdown overlay container.
+  final double? heightBottomContainer;
+
+  /// Suffix icon for additional functionality (optional).
+  final IconData? suffixIcon;
+
+  /// Padding around dropdown main row.
+  final EdgeInsetsGeometry? padding;
+
+  /// Padding around dropdown list items.
+  final EdgeInsetsGeometry? paddingDropItem;
+
+  /// Border color of dropdown overlay box.
+  final Color? dropBoxBorderColor;
+
+  /// Background color of dropdown overlay.
+  final Color? dropboxColor;
+
+  /// Border radius of the dropdown overlay.
+  final BorderRadiusGeometry? dropBoxBorderRadius;
+
+  /// Color of the scrollbar thumb.
+  final Color? scrollThumbColor;
+
+  /// Thickness of the scrollbar.
+  final double? scrollThickness;
+
+  /// Radius of the scrollbar.
+  final Radius? scrollRadius;
+
+  /// Called when the clear button is tapped.
+  final VoidCallback? onClear;
+
+  /// Whether to show a clear (reset) button.
+  final bool showClearButton;
+  /// Creates a [SelectDropList] widget.
   const SelectDropList({
     super.key,
     required this.itemSelected,
@@ -85,10 +165,17 @@ class SelectDropList<T> extends StatefulWidget {
   SelectDropListState<T> createState() => SelectDropListState<T>();
 }
 
+/// State class for [SelectDropList].
 class SelectDropListState<T> extends State<SelectDropList<T>> {
+  /// Currently selected item.
   OptionItems<T>? optionItemSelected;
+
+  /// Whether the dropdown overlay is shown.
   bool isShow = false;
+
+  /// Controller for the scroll view inside the dropdown.
   final scrollController = ScrollController();
+
   final LayerLink _layerLink = LayerLink();
   OverlayEntry? _overlayEntry;
 
@@ -98,6 +185,7 @@ class SelectDropListState<T> extends State<SelectDropList<T>> {
     optionItemSelected = widget.itemSelected;
   }
 
+  /// Toggles the dropdown overlay visibility.
   void _toggleOverlay() {
     if (!isShow) {
       if (widget.dropListModel.listOptionItems.isEmpty) return;
@@ -108,18 +196,21 @@ class SelectDropListState<T> extends State<SelectDropList<T>> {
     }
   }
 
+  /// Shows the dropdown overlay.
   void _showOverlay() {
     if (_overlayEntry != null) return;
     _overlayEntry = _createOverlayEntry();
     Overlay.of(context).insert(_overlayEntry!);
   }
 
+  /// Removes the dropdown overlay.
   void _removeOverlay() {
     _overlayEntry?.remove();
     _overlayEntry = null;
     setState(() => isShow = false);
   }
 
+  /// Creates the dropdown overlay widget.
   OverlayEntry _createOverlayEntry() {
     RenderBox renderBox = context.findRenderObject() as RenderBox;
     Offset offset = renderBox.localToGlobal(Offset.zero);
@@ -135,25 +226,25 @@ class SelectDropListState<T> extends State<SelectDropList<T>> {
           showWhenUnlinked: false,
           offset: widget.height != null
               ? Offset(0, widget.height! + 10)
-              : Offset(0, 60),
+              : const Offset(0, 60),
           child: Material(
             elevation: 4,
             borderRadius:
-                widget.dropBoxBorderRadius ?? BorderRadius.circular(10),
+            widget.dropBoxBorderRadius ?? BorderRadius.circular(10),
             child: Container(
               height: widget.heightBottomContainer,
               decoration: BoxDecoration(
                 color: widget.dropboxColor ?? Colors.white,
                 border:
-                    Border.all(color: widget.dropBoxBorderColor ?? Colors.grey),
+                Border.all(color: widget.dropBoxBorderColor ?? Colors.grey),
                 borderRadius:
-                    widget.dropBoxBorderRadius ?? BorderRadius.circular(10),
+                widget.dropBoxBorderRadius ?? BorderRadius.circular(10),
               ),
               child: RawScrollbar(
                 controller: scrollController,
                 thumbVisibility: true,
                 thumbColor: widget.scrollThumbColor ?? Colors.black,
-                radius: widget.scrollRadius ?? Radius.circular(4),
+                radius: widget.scrollRadius ?? const Radius.circular(4),
                 thickness: widget.scrollThickness ?? 3,
                 child: SingleChildScrollView(
                   controller: scrollController,
@@ -171,6 +262,7 @@ class SelectDropListState<T> extends State<SelectDropList<T>> {
     );
   }
 
+  /// Builds an individual item in the dropdown list.
   Widget _buildSubMenu(OptionItems<T> item) {
     return Padding(
       padding: widget.paddingDropItem ?? const EdgeInsets.all(15),
@@ -220,26 +312,27 @@ class SelectDropListState<T> extends State<SelectDropList<T>> {
           margin: widget.containerMargin ?? const EdgeInsets.only(top: 10),
           decoration: widget.showBorder
               ? widget.containerDecoration ??
-                  BoxDecoration(
-                    borderRadius:
-                        widget.borderRadius ?? BorderRadius.circular(10),
-                    border: Border.all(
-                        color: widget.borderColor ?? Colors.black,
-                        width: widget.borderSize),
-                    color: Colors.white,
-                  )
+              BoxDecoration(
+                borderRadius:
+                widget.borderRadius ?? BorderRadius.circular(10),
+                border: Border.all(
+                    color: widget.borderColor ?? Colors.black,
+                    width: widget.borderSize),
+                color: Colors.white,
+              )
               : widget.containerDecoration ??
-                  BoxDecoration(
-                    borderRadius:
-                        widget.borderRadius ?? BorderRadius.circular(10),
-                    color: Colors.white,
-                    boxShadow: widget.boxShadow ??
-                        [
-                          BoxShadow(
-                              blurRadius: 2,
-                              color: widget.shadowColor ?? Colors.black26),
-                        ],
-                  ),
+              BoxDecoration(
+                borderRadius:
+                widget.borderRadius ?? BorderRadius.circular(10),
+                color: Colors.white,
+                boxShadow: widget.boxShadow ??
+                    [
+                      BoxShadow(
+                        blurRadius: 2,
+                        color: widget.shadowColor ?? Colors.black26,
+                      ),
+                    ],
+              ),
           child: Row(
             children: [
               if (widget.showIcon)
@@ -265,7 +358,7 @@ class SelectDropListState<T> extends State<SelectDropList<T>> {
                     });
                     widget.onClear?.call();
                   },
-                  child: Icon(Icons.clear, color: Colors.grey),
+                  child: const Icon(Icons.clear, color: Colors.grey),
                 ),
               if (widget.showArrowIcon)
                 Icon(
@@ -283,7 +376,6 @@ class SelectDropListState<T> extends State<SelectDropList<T>> {
   @override
   void didUpdateWidget(covariant SelectDropList<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
-    // If parent changed the selected item, update local state
     if (widget.itemSelected != oldWidget.itemSelected) {
       setState(() {
         optionItemSelected = widget.itemSelected;
@@ -292,15 +384,20 @@ class SelectDropListState<T> extends State<SelectDropList<T>> {
   }
 }
 
-//Model
-
+/// A list model containing a collection of dropdown items.
 class DropdownListModel<T> {
+  /// The list of available items.
   final List<OptionItems<T>> listOptionItems;
+  /// Creates a [DropdownListModel] with a list of [OptionItems].
   DropdownListModel(this.listOptionItems);
 }
 
+/// Model representing a selectable dropdown item.
 class OptionItems<T> {
+  /// The actual value (object) of the item.
   final T? model;
+
+  /// The text shown in the dropdown for this item.
   final String displayTitle;
 
   OptionItems({this.model, required this.displayTitle});

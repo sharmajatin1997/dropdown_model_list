@@ -1,63 +1,140 @@
 import 'package:dropdown_model_list/drop_down/multiselect_chip.dart';
 import 'package:flutter/material.dart';
 
-// Model
+/// A model that holds a list of selectable dropdown items.
 class MultiDropdownSearchListModel<T> {
+  /// The list of options available for selection in the dropdown.
   final List<OptionItemsMultiSearch<T>> listOptionItems;
+
+  /// Creates a [MultiDropdownSearchListModel] with a list of [OptionItemsMultiSearch].
   MultiDropdownSearchListModel(this.listOptionItems);
 }
 
+/// Represents an individual selectable option in a multi-select dropdown.
+/// Contains a display title and an optional underlying model value.
 class OptionItemsMultiSearch<T> {
+  /// The actual value associated with the dropdown item.
   final T? model;
+
+  /// The display name shown in the dropdown.
   final String displayTitle;
 
+  /// Creates an [OptionItemsMultiSearch] with an optional [model] and a required [displayTitle].
   OptionItemsMultiSearch({this.model, required this.displayTitle});
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is OptionItemsMultiSearch<T> &&
-          runtimeType == other.runtimeType &&
-          displayTitle == other.displayTitle;
+          other is OptionItemsMultiSearch<T> &&
+              runtimeType == other.runtimeType &&
+              displayTitle == other.displayTitle;
 
   @override
   int get hashCode => displayTitle.hashCode;
 }
 
+
+/// A customizable widget that allows users to select multiple options from a searchable dropdown list.
+///
+/// Displays a dropdown with checkboxes, optional search bar, and chips to show selected items.
 class MultipleSelectionSearchDropList<T> extends StatefulWidget {
+  /// The data model containing the dropdown options.
   final MultiDropdownSearchListModel<T> dropListModel;
+
+  /// The list of currently selected items.
   final List<OptionItemsMultiSearch<T>> selectedItems;
+
+  /// Callback triggered when the selected options change.
   final ValueChanged<List<OptionItemsMultiSearch<T>>> onOptionsSelected;
+
+  /// Hint text displayed when no items are selected.
   final String hintText;
 
+  /// Background color of the dropdown overlay.
   final Color? dropboxColor;
+
+  /// Border color of the dropdown overlay.
   final Color? dropBoxBorderColor;
+
+  /// Color of the scrollbar thumb.
   final Color? scrollThumbColor;
 
+  /// Radius of the scrollbar thumb.
   final Radius? scrollRadius;
+
+  /// Thickness of the scrollbar.
   final double? scrollThickness;
+
+  /// Maximum height of the dropdown container.
   final double? heightBottomContainer;
+
+  /// Font size for the hint text.
   final double? fontSizeHint;
+
+  /// Text color for individual dropdown items.
   final Color? textColorItem;
+
+  /// Text color for the hint/placeholder.
   final Color? textColorTitle;
+
+  /// Whether to show a dropdown arrow icon.
   final bool showArrowIcon;
+
+  /// Whether to show a clear button.
   final bool showClearButton;
+
+  /// Callback triggered when the clear button is pressed.
   final VoidCallback? onClear;
-  final double? height, width;
-  final EdgeInsetsGeometry? containerPadding, containerMargin;
+
+  /// Height of the dropdown field.
+  final double? height;
+
+  /// Width of the dropdown field.
+  final double? width;
+
+  /// Padding inside the dropdown container.
+  final EdgeInsetsGeometry? containerPadding;
+
+  /// Margin around the dropdown container.
+  final EdgeInsetsGeometry? containerMargin;
+
+  /// Custom decoration for the dropdown container.
   final Decoration? containerDecoration;
+
+  /// Whether to show a border around the container.
   final bool showBorder;
+
+  /// Whether the dropdown is interactive.
   final bool enable;
+
+  /// Whether to show the search bar inside the dropdown.
   final bool enableSearch;
+
+  /// Color of the border when `showBorder` is true.
   final Color? borderColor;
+
+  /// Shadow color of the container when border is not shown.
   final Color? shadowColor;
+
+  /// Width of the border when `showBorder` is true.
   final double borderSize;
+
+  /// Size of the arrow icon.
   final double arrowIconSize;
+
+  /// Color of the arrow icon.
   final Color? arrowColor;
+
+  /// Border radius for the container.
   final BorderRadiusGeometry? borderRadius;
+
+  /// List of box shadows to apply to the container.
   final List<BoxShadow>? boxShadow;
+
+  /// Optional custom widget for the "Done" button in the overlay.
   final Widget? doneButton;
 
+  /// Creates a [MultipleSelectionSearchDropList] widget.
   const MultipleSelectionSearchDropList({
     super.key,
     required this.dropListModel,

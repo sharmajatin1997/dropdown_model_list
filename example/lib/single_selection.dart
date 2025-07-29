@@ -1,5 +1,5 @@
 import 'package:dropdown_model_list/drop_down/select_drop_list.dart';
-import 'package:example/model/userModel.dart';
+import 'package:example/model/user_model.dart';
 import 'package:flutter/material.dart';
 
 class SingleSelection extends StatefulWidget {

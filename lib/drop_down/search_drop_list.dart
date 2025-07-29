@@ -1,35 +1,92 @@
 import 'package:flutter/material.dart';
 
+/// A customizable searchable dropdown list widget.
+///
+/// [SearchDropList] provides a UI component that allows users to search and select
+/// an item from a dropdown list. Supports custom styling, overlay, borders, shadow,
+/// and clear/reset functionality.
 class SearchDropList<T> extends StatefulWidget {
+  /// The model representing the dropdown list of options.
   final DropdownSearchListModel<T> dropListModel;
+
+  /// The currently selected item in the dropdown.
   final OptionItemsSearch<T>? itemSelected;
+
+  /// Callback when an option is selected.
   final ValueChanged<OptionItemsSearch<T>> onOptionSelected;
+
+  /// Placeholder or hint text when no item is selected.
   final String hintText;
 
+  /// Background color of the dropdown list.
   final Color? dropboxColor;
+
+  /// Border color of the dropdown list.
   final Color? dropBoxBorderColor;
+
+  /// Color of the scrollbar thumb.
   final Color? scrollThumbColor;
 
+  /// Radius of the scrollbar thumb.
   final Radius? scrollRadius;
+
+  /// Thickness of the scrollbar.
   final double? scrollThickness;
+
+  /// Max height allowed for dropdown overlay.
   final double? heightBottomContainer;
 
+  /// Text color for dropdown items.
   final Color? textColorItem;
-  final Color? textColorTitle;
-  final bool showArrowIcon;
-  final bool showClearButton;
-  final VoidCallback? onClear;
-  final double? height, width;
-  final EdgeInsetsGeometry? containerPadding, containerMargin;
-  final Decoration? containerDecoration;
-  final bool showBorder;
-  final bool enable;
-  final Color? borderColor;
-  final Color? shadowColor;
-  final double borderSize;
-  final BorderRadiusGeometry? borderRadius;
-  final List<BoxShadow>? boxShadow;
 
+  /// Text color for the selected item title.
+  final Color? textColorTitle;
+
+  /// Whether to show the dropdown arrow icon.
+  final bool showArrowIcon;
+
+  /// Whether to show a clear/reset button when an item is selected.
+  final bool showClearButton;
+
+  /// Callback triggered when the clear button is pressed.
+  final VoidCallback? onClear;
+
+  /// Height of the dropdown widget.
+  final double? height;
+
+  /// Width of the dropdown widget.
+  final double? width;
+
+  /// Padding inside the container.
+  final EdgeInsetsGeometry? containerPadding;
+
+  /// Margin around the container.
+  final EdgeInsetsGeometry? containerMargin;
+
+  /// Decoration of the container.
+  final Decoration? containerDecoration;
+
+  /// Whether to show a border around the container.
+  final bool showBorder;
+
+  /// Whether the dropdown is interactive.
+  final bool enable;
+
+  /// Color of the dropdown border.
+  final Color? borderColor;
+
+  /// Shadow color of the container.
+  final Color? shadowColor;
+
+  /// Width of the border.
+  final double borderSize;
+
+  /// Border radius of the container.
+  final BorderRadiusGeometry? borderRadius;
+
+  /// Box shadow effects.
+  final List<BoxShadow>? boxShadow;
+  /// Creates a [SearchDropList] widget.
   const SearchDropList({
     super.key,
     required this.dropListModel,
@@ -65,6 +122,7 @@ class SearchDropList<T> extends StatefulWidget {
   State<SearchDropList<T>> createState() => _SearchDropListState<T>();
 }
 
+/// State class for [SearchDropList].
 class _SearchDropListState<T> extends State<SearchDropList<T>> {
   final LayerLink _layerLink = LayerLink();
   late TextEditingController _searchController;
@@ -84,6 +142,7 @@ class _SearchDropListState<T> extends State<SearchDropList<T>> {
     _localFilteredItems = widget.dropListModel.listOptionItems;
   }
 
+  /// Opens the dropdown overlay.
   void _openOverlay() {
     _overlayEntry = _createOverlayEntry();
     Overlay.of(context).insert(_overlayEntry!);
@@ -91,6 +150,7 @@ class _SearchDropListState<T> extends State<SearchDropList<T>> {
     _searchFocusNode.requestFocus();
   }
 
+  /// Closes the dropdown overlay.
   void _closeOverlay() {
     _overlayEntry?.remove();
     _overlayEntry = null;
@@ -99,6 +159,7 @@ class _SearchDropListState<T> extends State<SearchDropList<T>> {
     _localFilteredItems = widget.dropListModel.listOptionItems;
   }
 
+  /// Creates the dropdown overlay entry.
   OverlayEntry _createOverlayEntry() {
     RenderBox renderBox = context.findRenderObject() as RenderBox;
     Offset offset = renderBox.localToGlobal(Offset.zero);
@@ -140,6 +201,7 @@ class _SearchDropListState<T> extends State<SearchDropList<T>> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
+                        // Search bar
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextField(
@@ -150,8 +212,8 @@ class _SearchDropListState<T> extends State<SearchDropList<T>> {
                                 _localFilteredItems = widget
                                     .dropListModel.listOptionItems
                                     .where((item) => item.displayTitle
-                                        .toLowerCase()
-                                        .contains(query.toLowerCase()))
+                                    .toLowerCase()
+                                    .contains(query.toLowerCase()))
                                     .toList();
                               });
                               setOverlayState(() {});
@@ -161,16 +223,16 @@ class _SearchDropListState<T> extends State<SearchDropList<T>> {
                               prefixIcon: const Icon(Icons.search),
                               suffixIcon: _searchController.text.isNotEmpty
                                   ? IconButton(
-                                      icon: const Icon(Icons.clear),
-                                      onPressed: () {
-                                        _searchController.clear();
-                                        setState(() {
-                                          _localFilteredItems = widget
-                                              .dropListModel.listOptionItems;
-                                        });
-                                        setOverlayState(() {});
-                                      },
-                                    )
+                                icon: const Icon(Icons.clear),
+                                onPressed: () {
+                                  _searchController.clear();
+                                  setState(() {
+                                    _localFilteredItems = widget
+                                        .dropListModel.listOptionItems;
+                                  });
+                                  setOverlayState(() {});
+                                },
+                              )
                                   : null,
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8.0),
@@ -181,13 +243,14 @@ class _SearchDropListState<T> extends State<SearchDropList<T>> {
                             ),
                           ),
                         ),
+                        // Dropdown list
                         Expanded(
                           child: RawScrollbar(
                             controller: scrollController,
                             thumbVisibility: true,
                             thumbColor: widget.scrollThumbColor ?? Colors.blue,
                             radius:
-                                widget.scrollRadius ?? const Radius.circular(4),
+                            widget.scrollRadius ?? const Radius.circular(4),
                             thickness: widget.scrollThickness ?? 3,
                             child: ListView.builder(
                               controller: scrollController,
@@ -200,7 +263,7 @@ class _SearchDropListState<T> extends State<SearchDropList<T>> {
                                     item.displayTitle,
                                     style: TextStyle(
                                       color:
-                                          widget.textColorItem ?? Colors.black,
+                                      widget.textColorItem ?? Colors.black,
                                     ),
                                   ),
                                   onTap: () {
@@ -254,26 +317,26 @@ class _SearchDropListState<T> extends State<SearchDropList<T>> {
           margin: widget.containerMargin ?? const EdgeInsets.only(top: 10),
           decoration: widget.showBorder
               ? widget.containerDecoration ??
-                  BoxDecoration(
-                    borderRadius:
-                        widget.borderRadius ?? BorderRadius.circular(10),
-                    border: Border.all(
-                        color: widget.borderColor ?? Colors.black,
-                        width: widget.borderSize),
-                    color: Colors.white,
-                  )
+              BoxDecoration(
+                borderRadius:
+                widget.borderRadius ?? BorderRadius.circular(10),
+                border: Border.all(
+                    color: widget.borderColor ?? Colors.black,
+                    width: widget.borderSize),
+                color: Colors.white,
+              )
               : widget.containerDecoration ??
-                  BoxDecoration(
-                    borderRadius:
-                        widget.borderRadius ?? BorderRadius.circular(10),
-                    color: Colors.white,
-                    boxShadow: widget.boxShadow ??
-                        [
-                          BoxShadow(
-                              blurRadius: 2,
-                              color: widget.shadowColor ?? Colors.black26),
-                        ],
-                  ),
+              BoxDecoration(
+                borderRadius:
+                widget.borderRadius ?? BorderRadius.circular(10),
+                color: Colors.white,
+                boxShadow: widget.boxShadow ??
+                    [
+                      BoxShadow(
+                          blurRadius: 2,
+                          color: widget.shadowColor ?? Colors.black26),
+                    ],
+              ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -304,15 +367,21 @@ class _SearchDropListState<T> extends State<SearchDropList<T>> {
   }
 }
 
-// Model
+/// Model representing a list of dropdown items.
 class DropdownSearchListModel<T> {
+  /// The list of option items available in the dropdown.
   final List<OptionItemsSearch<T>> listOptionItems;
+  /// Creates a [DropdownSearchListModel] with a list of [OptionItemsSearch].
   DropdownSearchListModel(this.listOptionItems);
 }
 
+/// Model representing a selectable item in the dropdown.
 class OptionItemsSearch<T> {
+  /// The underlying value for the dropdown option.
   final T? model;
-  final String displayTitle;
 
+  /// The text label displayed in the dropdown.
+  final String displayTitle;
+  /// Creates an [OptionItemsSearch] with an optional [model] and a required [displayTitle].
   OptionItemsSearch({this.model, required this.displayTitle});
 }

@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 
+/// A single chip widget used to display a selected item with a delete icon.
+///
+/// Typically used to represent a selected tag or option in a multi-select UI.
 class MultiSelectChip extends StatelessWidget {
+  /// The label to display inside the chip.
   final String label;
+
+  /// Callback triggered when the chip's delete icon is tapped.
   final VoidCallback onDeleted;
 
+  /// Creates a [MultiSelectChip] with a [label] and an [onDeleted] callback.
   const MultiSelectChip({
     required this.label,
     required this.onDeleted,
@@ -30,10 +37,17 @@ class MultiSelectChip extends StatelessWidget {
   }
 }
 
+/// A row of [MultiSelectChip] widgets used to show a list of selected items.
+///
+/// Displays the chips using a [Wrap] layout for proper spacing and line wrapping.
 class ChipRow extends StatelessWidget {
+  /// List of labels to display as chips.
   final List<String> selectedLabels;
+
+  /// Callback triggered when a chip's delete icon is tapped.
   final void Function(String) onDelete;
 
+  /// Creates a [ChipRow] with a list of [selectedLabels] and an [onDelete] callback.
   const ChipRow({
     super.key,
     required this.selectedLabels,
@@ -46,9 +60,9 @@ class ChipRow extends StatelessWidget {
       alignment: WrapAlignment.start,
       children: selectedLabels
           .map((label) => MultiSelectChip(
-                label: label,
-                onDeleted: () => onDelete(label),
-              ))
+        label: label,
+        onDeleted: () => onDelete(label),
+      ))
           .toList(),
     );
   }
